@@ -25,7 +25,7 @@
         </div>
         <img src="{{ asset('assets/images/Frame 122.png') }}" alt="" class="rounded-lg object-cover w-1/2">
     </section>
-    <section class="flex justify-center items-center flex-col bg-white p-2 rounded-lg">
+    <section class="flex justify-center items-center flex-col bg-white p-2 rounded-lg xy-shadow-no-blur border border-black">
         <img src=" {{ asset('assets/images/enquire.jpg')}} " alt="" class="rounded-lg object-cover w-full h-[400px]">
         <div>
             <h1 class="font-primary text-6xl mb-10">Enquire</h1>
@@ -51,7 +51,7 @@
             </p>
         </div>
     </section>
-    <section class="flex flex-col gap-4 mt-2 p-2">
+    <section class="flex flex-col gap-4 mt-2 p-2 bg-white border border-black xy-shadow-no-blur mb-4 rounded">
         <div>
             <h1 class="font-primary text-6xl mb-10">
                 Collect
