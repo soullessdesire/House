@@ -14,9 +14,12 @@ return new class extends Migration
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
             $table->string('county');
-            $table->string('nearest_landmark');
-            $table->string('latitude');
-            $table->string('longitude');
+            $table->string('subcounty');
+            $table->string('constituency');
+            $table->string('ward');
+            $table->string('location');
+            $table->string('sublocation');
+            $table->string('village');
             $table->timestamps();
         });
     }
