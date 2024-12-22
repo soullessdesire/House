@@ -2,6 +2,8 @@
     <x-slot:heading>
         ShowCase
     </x-slot:heading>
+    <x-slot:otherImports>
+    </x-slot:otherImports>
     <x-navbar.navbar></x-navbar.navbar>
     <br>
     <section class="w-full flex">
