@@ -22,6 +22,7 @@
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
+    gap: 1.5rem;
 }
 
 .button-86::after,
@@ -93,8 +94,8 @@ textarea {
 ion-icon {
     color: white;
     font-size: 32px;
-     --ionicon-stroke-width: 16px;
+    --ionicon-stroke-width: 16px;
 }
-ion-icon[name=search]{
+ion-icon[name="search"] {
     --ionicon-stroke-width: 16px;
 }
