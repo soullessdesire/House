@@ -19,7 +19,6 @@ return new class extends Migration
             $table->foreignId('owner_id')->constrained('users')->onDelete('cascade');
             $table->text('long_description');
             $table->decimal('price', 10, 2);
-            $table->decimal('running_costs', 10, 2);
             $table->foreignId('location_id')->constrained('locations')->onDelete('cascade');
             $table->integer('bedrooms');
             $table->timestamp('date_listed')->default(DB::raw('CURRENT_TIMESTAMP'));

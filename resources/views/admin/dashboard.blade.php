@@ -78,6 +78,7 @@
         </section> -->
     </section>
     <section class="w-full border shadow rounded mt-4 grid grid-cols-1 grid-rows-1 h-[500px]">
-        <!-- Graph -->
+        {!! $chart->container() !!}
     </section>
+    {{ $chart->script() }}
 </x-admin_layout>
