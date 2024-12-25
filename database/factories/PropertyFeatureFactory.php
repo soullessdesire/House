@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Property;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,8 @@ class PropertyFeatureFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'feature_name' => fake()->word(),
+            'property_id' => Property::factory(),
         ];
     }
 }

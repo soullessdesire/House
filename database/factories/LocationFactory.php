@@ -17,7 +17,13 @@ class LocationFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'county' => fake()->state(),
+            'subcounty' => fake()->city(),
+            'constituency' => fake()->word(),
+            'ward' => fake()->word(),
+            'location' => fake()->streetName(),
+            'sublocation' => fake()->word(),
+            'village' => fake()->citySuffix(),
         ];
     }
 }

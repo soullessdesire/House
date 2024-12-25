@@ -25,7 +25,7 @@ class PropertyFactory extends Factory
             'location' => LocationFactory::factory(),
             'bedrooms' => fake()->randomInteger(),
             'date_listed' => fake()->dateTimeBetween('now', '+1 year')->format('Y-m-d'),
-            ''
+            'status' => fake()->randomElement(['']),
         ];
     }
 }
