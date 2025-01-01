@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('county');
             $table->string('subcounty');
-            $table->string('constituency');
-            $table->string('ward');
-            $table->string('location');
-            $table->string('sublocation');
-            $table->string('village');
+            $table->string('constituency')->nullable(true);
+            $table->string('ward')->nullable(true);
+            $table->string('location')->nullable(true);
+            $table->string('sublocation')->nullable(true);
+            $table->string('village')->nullable(true);
             $table->timestamps();
         });
     }

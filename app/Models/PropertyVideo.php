@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PropertyImage extends Model
+class PropertyVideo extends Model
 {
+    /** @use HasFactory<\Database\Factories\PropertyVideoFactory> */
     use HasFactory;
-    protected $guarded = [];
 }

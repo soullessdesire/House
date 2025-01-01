@@ -3,7 +3,7 @@ $links = [
 ['Home', '/'],
 ['About Us', '/about-us'],
 ['Contact Us', '/contact-us'],
-['Catalog', '/catalog'],
+['Catalog', '/property'],
 
 ]
 @endphp

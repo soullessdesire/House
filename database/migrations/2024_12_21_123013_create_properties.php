@@ -17,11 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->foreignId('owner_id')->constrained('users')->onDelete('cascade');
-            $table->text('long_description');
+            $table->text('description');
             $table->decimal('price', 10, 2);
             $table->foreignId('location_id')->constrained('locations')->onDelete('cascade');
             $table->integer('bedrooms');
-            $table->timestamp('date_listed')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->enum('status', ['Available', 'Rented', 'Unlisted']);
             $table->timestamps();
         });

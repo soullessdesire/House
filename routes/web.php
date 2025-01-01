@@ -8,15 +8,21 @@ use App\Http\Controllers\PropertyController;
 Route::view('/', 'home')->name('home');
 Route::view('/about-us', 'about-us')->name('aboutUs');
 Route::view('/contact-us', 'contact-us')->name('contactUs');
-Route::view('/catalog', 'catalog')->name('catalog');
+
 
 Route::controller(PropertyController::class)->group(function () {
-    Route::get('/showcase/{id}', 'show')->name('showcase');
-    Route::get('/property/create', 'create')->name('property.create');
-    Route::post('/property', 'store')->name('property.store');
-    Route::get('/property/edit/{id}', 'edit')->name('property.edit')->can('update');
-    Route::patch('/property/{id}', 'update')->name('property.update')->can('update', 'property');
-    Route::delete('/property/{id}', 'destroy')->name('property.destroy');
+    Route::get('/property', 'index')->name('property');
+    Route::get('/property/{property}', 'show')->name('property.showcase');
+    Route::get('/property/create/meta', 'createMeta')->name('property.create.meta');
+    Route::get('/property/create/media', 'createMedia')->name('property.create.media');
+    Route::get('/property/edit/{property}', 'edit')->name('property.edit')->can('update', 'property');
+
+    Route::post('/property/create', 'store')->name('property.store');
+
+
+    Route::patch('/property/{property}', 'update')->name('property.update')->can('update', 'property');
+
+    Route::delete('/property/{property}', 'destroy')->name('property.destroy');
 });
 
 Route::controller(AuthController::class)->group(function () {

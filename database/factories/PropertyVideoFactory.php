@@ -6,9 +6,11 @@ use App\Models\Property;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory <\App\Models\PropertyImage>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\PropertyVideo>
  */
-class PropertyImageFactory extends Factory
+
+
+class PropertyVideoFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,7 +21,7 @@ class PropertyImageFactory extends Factory
     {
         return [
             'property_id' => Property::factory(),
-            'image_path' => fake()->imageUrl(),
+            'video_path' => fake()->videoUrl(),
         ];
     }
 }

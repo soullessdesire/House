@@ -105,3 +105,22 @@ ion-icon {
 ion-icon[name="search"] {
     --ionicon-stroke-width: 16px;
 }
+
+*::-webkit-outer-spin-button,
+*::-webkit-inner-spin-button {
+    display: none;
+}
+.checked-outline {
+    outline: 1px solid black;
+    outline-offset: 2px;
+}
+.checkbox-input:checked + .checkbox-label {
+    outline: 2px solid black;
+    outline-offset: 2px;
+}
+
+.h-800 {
+    height: 800px !important;
+    transition-duration: 500ms;
+    transition-timing-function: ease-in;
+}
