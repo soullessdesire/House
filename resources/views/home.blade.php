@@ -2,8 +2,8 @@
     <x-slot:heading>
         Home
     </x-slot:heading>
-    <x-slot:otherImports>
-    </x-slot:otherImports>
+    <x-slot:modalContent>
+    </x-slot:modalContent>
     <x-navbar.navbar></x-navbar.navbar>
     <section class="flex justify-center items-center flex-col gap-12 h-[530px] my-[40px]">
         <h1 class="font-primary text-8xl w-[976px] text-center">
@@ -24,7 +24,7 @@
             <h1 class="font-primary mb-3 text-black text-2xl text-center">
                 Search by location
             </h1>
-            <x-forms.search-input></x-forms.search-input>
+            <x-form.search></x-form.search>
             <br><br>
             <h3 class="font-primary mb-3 text-black text-2xl">
                 Filter By Budget
@@ -105,11 +105,11 @@
                 e.stopPropagation();
 
                 console.log(e.target.parentNode);
-                if (e.target.tagName === 'INPUT' && e.target.type === 'radio') {
+                if (e.target.tagName === 'INPUT' && e.target.type === 'checkbox') {
                     checkboxesParent.querySelectorAll('label').forEach(label => {
                         label.classList.remove('checked-outline');
                     });
-                    e.target.closest('label').classList.add('checked-outline');
+                    e.target.closest('label').classList.toggle('checked-outline');
                 }
             });
         });

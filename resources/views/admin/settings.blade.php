@@ -1,4 +1,4 @@
-<x-admin_layout>
+<x-admin.layout>
     <x-slot:heading>
         Settings
     </x-slot:heading>
@@ -27,4 +27,4 @@
             </button>
         </div>
     </section>
-</x-admin_layout>
+</x-admin.layout>

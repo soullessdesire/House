@@ -2,8 +2,8 @@
     <x-slot:heading>
         About Us
     </x-slot:heading>
-    <x-slot:otherImports>
-    </x-slot:otherImports>
+    <x-slot:modalContent>
+    </x-slot:modalContent>
     <x-navbar.navbar></x-navbar.navbar>
     <section class="flex justify-center items-center flex-col gap-12 h-[400px] my-[40px]">
         <h1 class="font-primary text-8xl w-[976px] text-center">

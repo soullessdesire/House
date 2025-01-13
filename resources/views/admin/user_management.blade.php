@@ -1,4 +1,4 @@
-<x-admin_layout>
+<x-admin.layout>
     <x-slot:heading>
         User Management
     </x-slot:heading>
@@ -39,14 +39,26 @@
             {{ $chart->script() }}
         </div>
         <div class="p-2 shadow border rounded min-h-[400px] flex flex-col">
-            <form action="" method="get" class="flex justify-between mb-2">
+            <div class="flex justify-between mb-2">
                 <input type="text" name="" id="" placeholder="Find User" class="text-black font-primary outline outline-1 outline-black xy-shadow-no-blur rounded h-[45px] w-4/6 px-3">
                 <button type="submit" class="xy-shadow-no-blur rounded border border-black flex justify-center items-center px-2">
                     <ion-icon name="search" class="text-black"></ion-icon>
                 </button>
-            </form>
-            <div class="rounded border shadow min-h-[300px] flex-grow">
+            </div>
+            <div class="rounded border shadow min-h-[300px] flex-grow overflow-scroll-y">
+                @foreach ($users as $user)
+                <div>
+                    <div></div>
+                    <div>
+                        <h1>{{$user->username}}</h1>
+                        <p>{{$user->email}}</p>
+                    </div>
+                    <form action="">
+                        button
+                    </form>
+                </div>
+                @endforeach
             </div>
         </div>
     </section>
-</x-admin_layout>
+</x-admin.layout>

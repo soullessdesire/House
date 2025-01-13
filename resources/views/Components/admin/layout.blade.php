@@ -13,7 +13,7 @@
 </head>
 
 <body class="flex">
-    <x-admin-sidebar></x-admin-sidebar>
+    <x-admin.sidebar></x-admin.sidebar>
     <article class="p-4 h-screen overflow-y-scroll overflow-x-hidden">
         {{ $slot }}
     </article>

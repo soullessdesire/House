@@ -2,9 +2,13 @@
     <x-slot:heading>
         Signup
     </x-slot:heading>
-    <x-slot:otherImports></x-slot:otherImports>
-    <section class="w-full h-screen flex justify-center items-center">
-        <div class="w-[600px] h-[600px] border shadow rounded p-4 bg-white">
+    <nav class="font-secondary flex justify-between items-center h-[80px] border-b border-black w-full">
+        <h1>
+            Company Name
+        </h1>
+    </nav>
+    <section class="w-full flex justify-center items-center p-4">
+        <div class="w-[600px] h-fit border shadow rounded p-4 bg-white">
             <h1 class="font-primary text-4xl mb-10">
                 Signup
             </h1>
@@ -16,7 +20,7 @@
                             type="text"
                             name="first_name"
                             id="firstname"
-                            placeholder="Firstname"
+                            placeholder="First Name"
                             class="font-primary placeholder-neutral-500 w-[225px] h-[50px] outline outline-black outline-1 xy-shadow-no-blur rounded mb-6 px-4"
                             aria-label="Firstname">
                         @error('firstname')
@@ -28,7 +32,7 @@
                             type="text"
                             name="last_name"
                             id="lastname"
-                            placeholder="Lastname"
+                            placeholder="Last Name"
                             class="font-primary placeholder-neutral-500 w-[225px] h-[50px] outline outline-black outline-1 xy-shadow-no-blur rounded mb-6 px-4"
                             aria-label="Lastname">
                         @error('lastname')
@@ -53,7 +57,7 @@
                         type="text"
                         name="phone_number"
                         id="phonenumber"
-                        placeholder="Phone_number"
+                        placeholder="Phone Number"
                         class="font-primary placeholder-neutral-500 w-[536px] h-[50px] outline outline-black outline-1 xy-shadow-no-blur rounded mb-6 px-4"
                         aria-label="Phone_number">
                     @error('phone_number')
@@ -89,20 +93,20 @@
             <p class="font-secondary mb-6">
                 Have an account? <a href="{{ url('/login') }}" class="text-blue-500">Login</a>
             </p>
-            <div class="flex justify-between">
-                <a href="http://" target="_blank" rel="noopener noreferrer" class="flex justify-center items-center gap-10 button-86">
+            <!-- <div class="flex justify-between">
+                <a href="{{route('social.redirect', ['provider' => 'google'])}}" target="_blank" rel="noopener noreferrer" class="flex justify-center items-center gap-10 button-86">
                     <ion-icon name="logo-google" class="text-white"></ion-icon>
                     <p>
                         Google
                     </p>
                 </a>
-                <a href="http://" target="_blank" rel="noopener noreferrer" class="flex justify-center items-center gap-10 button-86 ">
+                <a href="{{route('social.redirect', ['provider' => 'facebook'])}}" target="_blank" rel="noopener noreferrer" class="flex justify-center items-center gap-10 button-86 ">
                     <ion-icon name="logo-facebook" class="text-white"></ion-icon>
                     <p>
                         Facebook
                     </p>
                 </a>
-            </div>
+            </div> -->
         </div>
     </section>
 </x-layout>

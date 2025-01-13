@@ -13,7 +13,13 @@
     'village',
     ];
     @endphp
+    @if (empty($property))
     @foreach ($input_names as $input_name)
     <x-form.input type="text" name={{$input_name}} id="{{$input_name}}" placeholder="{{ ucwords(strtolower($input_name))}}"></x-form.input>
     @endforeach
+    @else
+    @foreach ($input_names as $input_name)
+    <x-form.input type="text" name={{$input_name}} id="{{$input_name}}" placeholder="{{ ucwords(strtolower($input_name))}}" value="{{$property->location[$input_name]}}"></x-form.input>
+    @endforeach
+    @endif
 </div>

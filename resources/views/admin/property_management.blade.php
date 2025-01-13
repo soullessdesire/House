@@ -1,4 +1,4 @@
-<x-admin_layout>
+<x-admin.layout>
     <x-slot:heading>
         Property Management
     </x-slot:heading>
@@ -9,16 +9,16 @@
     </section>
     <section class="grid grid-cols-4 grid-rows-1 gap-2 mb-4">
         <div class="p-2 border shadow rounded flex justify-center items-center flex-col gap-2">
-            <h1 class="text-3xl font-primary mb-4">
-                <span class="text-xs">#</span><span class="font-numbers text-5xl">1</span> Booking User
+            <h1 class="text-2xl font-primary mb-4">
+                <span class="text-xs">#</span><span class="font-numbers text-4xl">1</span> Booking User
             </h1>
             <img src=" {{asset('assets/images/person 1.jpg')}}" alt="" class="w-[150px] h-[150px] rounded-full object-center object-cover mb-4">
             <h3 class="font-secondary text-xl text-center mb-4">Francis Ndungu</h3>
             <p class="text-xs text-neutral-500 text-center font-secondary">francis@gmail.com</p>
         </div>
         <div class="p-2 border shadow rounded flex justify-center items-center flex-col gap-2">
-            <h1 class="text-3xl font-primary mb-4">
-                <span class="text-xs">#</span><span class="font-numbers text-5xl">1</span> Paying User
+            <h1 class="text-2xl font-primary mb-4">
+                <span class="text-xs">#</span><span class="font-numbers text-4xl">1</span> Paying User
             </h1>
             <img src=" {{asset('assets/images/person 2.jpg')}}" alt="" class="w-[150px] h-[150px] rounded-full object-center object-cover mb-4">
             <h3 class="font-secondary text-xl text-center mb-4">Miriam Githingi</h3>
@@ -40,4 +40,4 @@
         {!! $chart->container() !!}
     </section>
     {{ $chart->script() }}
-    </x-admin.admin_layout>
+</x-admin.layout>

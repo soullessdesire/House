@@ -1,4 +1,4 @@
-<div>
+<div {{$attributes->merge(['class' => ''])}}>
     <input id="imageinput" type="file" name="images[]" accept="image/*" id="" class="hidden" multiple>
     <h2 class="text-xl font-primary">
         Image

@@ -17,9 +17,6 @@ class Property extends Model
         'location_id',
         'status'
     ];
-
-
-
     public function location()
     {
         return $this->belongsTo(Location::class);
@@ -31,6 +28,10 @@ class Property extends Model
     public function images()
     {
         return $this->hasMany(PropertyImage::class);
+    }
+    public function videos()
+    {
+        return $this->hasMany(PropertyVideo::class);
     }
     public function bookings()
     {

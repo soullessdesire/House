@@ -2,10 +2,8 @@
     <x-slot:heading>
         Catalog
     </x-slot:heading>
-    <x-slot:otherImports>
-    </x-slot:otherImports>
     <x-navbar.navbar></x-navbar.navbar>
-    <section class="flex justify-center items-center flex-col gap-12 h-[470px] my-[40px]">
+    <section class="flex justify-center items-center flex-col gap-12 h-[400px] my-[40px]">
         <h1 class="font-primary text-8xl w-[976px] text-center">
             Catalog
         </h1>
@@ -13,7 +11,7 @@
     <section class="border-y border-black w-full h-[100px]" data-height="change">
         <form action="{{route('property')}}" method="get" class="flex flex-col w-full items-center h-full">
             <div class="flex justify-between w-full items-center h-fit mt-3">
-                <x-forms.search-input class="w-[950px]"></x-forms.search-input>
+                <x-form.search class="w-[950px]"></x-form.search>
                 <button class="w-[50px] h-[50px] bg-white border border-black xy-shadow-no-blur rounded" type="button" data-type="menu">
                     <ion-icon name="filter-outline" class="text-black"></ion-icon>
                 </button>
@@ -90,11 +88,11 @@
         <div class="flex flex-col gap-2 rouded shadow border p-2 h-[450px]">
             <img src="{{asset('assets/images/house.jpeg')}}" alt="" class="rounded object-cover w-full aspect-ratio-1">
             <h3 class="font-primary text-xl text-left">{{ $property->title }}</h3>
-            <p class="font-secondary text-sm text-neutral-500 mb-auto">{{ $property->long_description }}</p>
+            <p class="font-secondary text-sm text-neutral-500 mb-auto">{{ $property->description }}</p>
             <a href="{{url('/property/'. $property->id)}}" class="justify-self-end px-4 py-3 bg-black rounded border w-fit border-black text-white hover:text-black hover:bg-white transition transitioon-duration-500">Check This House</a>
         </div>
         @endforeach
-        <div class="col-span-3">
+        <div class="col-span-3 border-t border-black py-3">
             {{ $properties->links() }}
         </div>
     </section>

@@ -3,13 +3,16 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\User;
 use App\Models\Property;
+use App\Policies\AdminPolicy;
 use App\Policies\PropertyPolicy;
 
 class AppServiceProvider extends ServiceProvider
 {
     protected $policies = [
         Property::class => PropertyPolicy::class,
+        User::class => AdminPolicy::class
     ];
     /**
      * Register any application services.
@@ -24,6 +27,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // if (env('APP_ENV') === 'local') {
+        //     URL::forceScheme('https');
+        // }
     }
 }

@@ -1,4 +1,4 @@
-<x-admin_layout>
+<x-admin.layout>
     <x-slot:heading>
         DashBoard
     </x-slot:heading>
@@ -81,4 +81,4 @@
         {!! $chart->container() !!}
     </section>
     {{ $chart->script() }}
-</x-admin_layout>
+</x-admin.layout>

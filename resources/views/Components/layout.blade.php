@@ -12,6 +12,7 @@
 </head>
 
 <body class="mx-[30px] bg-neutral-50 flex justify-center items-center flex-col overflow-y-scroll">
+    <div id="overlay" class="absolute top-0 right-0 left-0 h-[1270px] bg-black/20 z-10 hidden"></div>
     {{ $slot }}
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 </body>

@@ -98,14 +98,12 @@ textarea {
 }
 
 ion-icon {
-    color: white;
-    font-size: 32px;
+    font-size: 24px;
     --ionicon-stroke-width: 16px;
 }
 ion-icon[name="search"] {
     --ionicon-stroke-width: 16px;
 }
-
 *::-webkit-outer-spin-button,
 *::-webkit-inner-spin-button {
     display: none;

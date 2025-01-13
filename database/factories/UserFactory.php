@@ -45,4 +45,14 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+    public function admin()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'email' => 'admin@info.com',
+                'username' => 'admin',
+                'role' => true,
+            ];
+        });
+    }
 }

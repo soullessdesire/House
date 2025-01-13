@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Location;
+use Illuminate\Support\Facades\Mail;
 use Exception;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -10,13 +11,14 @@ use App\Models\Property;
 use App\Models\PropertyImage;
 use App\Models\PropertyVideo;
 use Illuminate\Support\Facades\Auth;
+use \App\Mail\PropertyPosted;
 
 class PropertyController extends Controller
 {
     public function index()
     {
-        $budget = request()->input('budget'); // Selected budget
-        $bedrooms = request()->input('bedrooms', []); // Array of bedroom categories
+        $budget = request()->input('budget');
+        $bedrooms = request()->input('bedrooms', []);
 
         $query = Property::query();
 
@@ -56,6 +58,51 @@ class PropertyController extends Controller
     public function createMedia()
     {
         return view('property.form.mediadata');
+    }
+    public function imageStore(Property $property, Request $request)
+    {
+        try {
+
+            if ($request->hasFile('images')) {
+
+                foreach ($request->file('images') as $image) {
+                    $path = $image->store('assets/images/db', 'public');
+                    PropertyImage::create([
+                        'property_id' => $property->id,
+                        'image_path' => $path
+                    ]);
+                }
+            }
+        } catch (Exception $e) {
+            return response()->json(
+                [
+                    'message' => 'There has been an error in creating a new image for your property',
+                    'Error' => $e
+                ],
+                500
+            );
+        }
+        return response()->json(['message' => 'New Image has successefully been created'], 200);
+    }
+    public function videoStore(Property $property, Request $request)
+    {
+        try {
+            if ($request->hasFile('videos')) {
+                foreach ($request->file('videos') as $video) {
+                    $path = $video->store('assets/videos/db', 'public');
+                    PropertyVideo::create([
+                        'property_id' => $property->id,
+                        'video_path' => $path
+                    ]);
+                }
+            }
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => 'There has been an error in creating a new video for your property',
+                'Error' => $e
+            ]);
+        }
+        return response()->json(['message' => 'New Image has successfully been created'], 200);
     }
     public function store(Request $request)
     {
@@ -125,24 +172,39 @@ class PropertyController extends Controller
                 ]);
             }
         }
+        Mail::to($property->owner)->send(
+            new PropertyPosted($property)
+        );
 
-        return redirect('/property/' . $property->id);
+        return redirect('/property/{$property->id}');
     }
+
     public function edit(Property $property)
     {
-        return view('', ['property' => $property]);
+        return view('property.edit', ['property' => $property]);
     }
+
     public function update(Property $property)
     {
         $validated = request()->validate([
-            //code
+            'title' => 'required|string|max:45',
+            'description' => 'required|string',
+            'bedrooms' => 'required|integer|max:6',
+            'price' => 'required|integer|max:100000',
+            'county' => 'required|string|max:15',
+            'subcounty' => 'nullable|string|max:15',
+            'constituency' => 'nullable|string|max:15',
+            'ward' => 'nullable|string|max:15',
+            'location' => 'nullable|string|max:15',
+            'sublocation' => 'nullable|string|max:15',
+            'village' => 'nullable|string|max:15',
         ]);
         $property->update($validated);
         return redirect('/showcase/{$property->id()}');
     }
     public function destroy(Property $property)
     {
-        $property->delete();
-        return redirect('/post-a-rental-form');
+        $this->$property->delete();
+        return route('property');
     }
 }

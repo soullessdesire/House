@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use App\Models\User;
 
@@ -27,8 +28,6 @@ class AuthController extends Controller
             "email" => ['unique:users', 'required', 'min:11', 'max:254'],
             "password" => ['min:8']
         ]);
-
-        // dd($validated);
         $user = User::create($validated);
 
         Auth::login($user);
@@ -51,9 +50,44 @@ class AuthController extends Controller
                 'username_email' => 'Sorry, those credentials do not match our records.'
             ]);
         }
+        if (Auth::user()['role'] === 'Admin') {
+            return redirect()->route('dashboard');
+        }
 
         request()->session()->regenerate();
 
-        return redirect('/catalog');
+        return redirect()->route('property');
+    }
+    public function redirectToProvider($provider)
+    {
+        return Socialite::driver($provider)->redirect();
+    }
+
+    public function handleProviderCallback($provider)
+    {
+        try {
+            $socialUser = Socialite::driver($provider)->stateless()->user();
+            $user = User::where('email', $socialUser->getEmail())->first();
+
+            if (!$user) {
+                // Create a new user if not exists
+                $user = User::create([
+                    'name' => $socialUser->getName(),
+                    'email' => $socialUser->getEmail(),
+                    'provider' => $provider,
+                    'provider_id' => $socialUser->getId(),
+                    'avatar' => $socialUser->getAvatar(),
+                ]);
+            }
+
+            // Log the user in
+            Auth::login($user);
+
+            return redirect()->route('home');
+        } catch (\Exception $e) {
+            Log::error('Socialite error', ['error' => $e->getMessage()]);
+            dd($e, $e->getMessage());
+            return redirect()->route('login')->withErrors(['error' => 'Something went wrong!']);
+        }
     }
 }
