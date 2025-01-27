@@ -17,10 +17,17 @@ class PropertyController extends Controller
 {
     public function index()
     {
+        $county = request()->input('county');
         $budget = request()->input('budget');
         $bedrooms = request()->input('bedrooms', []);
 
         $query = Property::query();
+
+        if ($county) {
+            $query->whereHas('location', function ($query) use ($county) {
+                $query->where('county', $county);
+            });
+        }
 
         if ($budget) {
             $budgetRanges = [
