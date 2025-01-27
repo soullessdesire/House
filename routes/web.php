@@ -5,8 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\RegisterRequestController;
 use App\Http\Controllers\PropertyImageController;
 use App\Http\Controllers\PropertyVideoController;
+use App\Models\RegisterRequest;
 use Illuminate\Support\Facades\Auth;
 
 Route::view('/', 'home')->name('home');
@@ -48,6 +50,11 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/admin/property-management', 'property_management')->name('property-management');
     Route::get('/admin/user-management', 'user_management')->name('user-management');
     Route::get('/admin/settings', 'settings')->name('admin.settings');
+});
+Route::controller(RegisterRequest::class)->group(function () {
+    Route::get('/admin/user-register-request/', [RegisterRequestController::class, 'show'])->name('register-request');
+    Route::post('/admin/user-register-request/accept/{registerrequest}', [RegisterRequestController::class, 'accept_request'])->name('accept-register-request');
+    Route::post('/admin/user-register-request/deny/{registerrequest}', [RegisterRequestController::class, 'deny_request'])->name('deny-register-request');
 });
 
 Route::delete('/property/image/{propertyImage}', [PropertyImageController::class, 'destroy'])->name('property.image.destroy');

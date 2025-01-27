@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use App\Models\User;
+use App\Models\RegisterRequest;
 
 class AuthController extends Controller
 {
@@ -28,11 +29,11 @@ class AuthController extends Controller
             "email" => ['unique:users', 'required', 'min:11', 'max:254'],
             "password" => ['min:8']
         ]);
-        $user = User::create($validated);
 
-        Auth::login($user);
 
-        return redirect('/catalog');
+        RegisterRequest::create($validated);
+
+        return redirect('/catalog')->with('message', 'Your request has been sent to the admin of the website please wait as he confirms your identity and upgrade you to a user');
     }
     public function session()
     {
@@ -70,7 +71,6 @@ class AuthController extends Controller
             $user = User::where('email', $socialUser->getEmail())->first();
 
             if (!$user) {
-                // Create a new user if not exists
                 $user = User::create([
                     'name' => $socialUser->getName(),
                     'email' => $socialUser->getEmail(),
@@ -80,7 +80,6 @@ class AuthController extends Controller
                 ]);
             }
 
-            // Log the user in
             Auth::login($user);
 
             return redirect()->route('home');

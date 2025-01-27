@@ -14,7 +14,7 @@
 
 <body class="flex">
     <x-admin.sidebar></x-admin.sidebar>
-    <article class="p-4 h-screen overflow-y-scroll overflow-x-hidden">
+    <article class="p-4 h-screen overflow-y-scroll overflow-x-hidden grow">
         {{ $slot }}
     </article>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

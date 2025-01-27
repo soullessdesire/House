@@ -16,19 +16,19 @@
         </h1>
         <br>
         <br>
-        <form action="" method="post" class="flex justify-between w-full">
-            <div class="flex flex-col">
-                <input type="text" name="name" id="name" required placeholder="Name..." class="xy-shadow-no-blur outline outline-1 outiline-black h-[50px] w-[300px] rounded px-4 placeholder-black font-primary">
+        <form action="" method="post" class="flex justify-between w-full gap-16">
+            <div class="flex flex-col grow">
+                <input type="text" name="name" id="name" required placeholder="Name..." class="xy-shadow-no-blur outline outline-1 outiline-black max-h-[50px] min-h-[50px] min-w-[300px] rounded px-4 placeholder-black font-primary grow max-w-[800px] ">
                 <br>
                 <br>
-                <input type="email" name="Email" id="Email" required placeholder="Email..." class="xy-shadow-no-blur outline outline-1 outiline-black h-[50px] w-[300px] rounded px-4 placeholder-black font-primary">
+                <input type="email" name="Email" id="Email" required placeholder="Email..." class="xy-shadow-no-blur outline outline-1 outiline-black max-h-[50px] min-h-[50px] min-w-[300px] rounded px-4 placeholder-black font-primary grow max-w-[800px]">
                 <br>
                 <br>
-                <button class="border border-black font-secondary px-4  py-2 text-white hover:bg-white bg-black hover:text-black transition transition-duration-500">
+                <button class="border border-black font-secondary px-4  py-2 text-white hover:bg-white bg-black hover:text-black transition duration-500 hover:rounded max-w-[832px]" type="submit">
                     Send
                 </button>
             </div>
-            <textarea name="message" id="" required class="xy-shadow-no-blur outline outline-1 outline-black h-[300px] w-[600px] rounded px-4 py-2 placeholder-black font-primary" placeholder="Message Us ..."></textarea>
+            <textarea name="message" id="" required class="grow xy-shadow-no-blur outline outline-1 outline-black h-[300px] w-[600px] rounded px-4 py-2 placeholder-black font-primary max-w-[1500px]" placeholder="Message Us ..."></textarea>
         </form>
     </section>
     <br>

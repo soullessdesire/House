@@ -2,7 +2,7 @@
     <x-slot:heading>
         User Management
     </x-slot:heading>
-    <section class="w-[950px]">
+    <section>
         <h1 class="text-6xl font-primary mb-6">
             User Management
         </h1>
