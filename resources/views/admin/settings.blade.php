@@ -9,15 +9,6 @@
     </section>
     <section>
         <h2 class="font-primary text-3xl mb-6">
-            Password
-        </h2>
-        <div class="flex justify-between gap-4 mb-4">
-            <input type="text" readonly value="Fuck*********" class="h-[50px] px-4 flex-grow xy-shadow-no-blur outline outline-1 outline-black rounded font-primary">
-            <button class="button-86">
-                Update Password
-            </button>
-        </div>
-        <h2 class="font-primary text-3xl mb-6">
             Email
         </h2>
         <div class="flex justify-between gap-4">

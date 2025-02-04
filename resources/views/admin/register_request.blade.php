@@ -7,7 +7,7 @@
             User Register Requests
         </h1>
     </section>
-    <section class="w-full">
+    <section class="w-full h-screen overflow-y-scroll p-2 rounded border border-black">
         @foreach ($requests as $request)
         <div class="rounded border shadow mb-4 items-center pl-4 m-2 p-2 grid grid-cols-4 grid-rows-1 w-full gap-4">
             <span class="font-numbers text-2xl">
@@ -32,6 +32,7 @@
                 </form>
                 <form action="{{ route('deny-register-request', ['registerrequest' => $request->id])}}" method="post">
                     @csrf
+                    @method('DELETE')
                     <button type="submit" class="bg-red-800 border border-red-800 text-white rounded transition transition-all duration-300 hover:bg-transparent hover:text-red-800 px-3 py-2 group"><ion-icon name="close-outline" class="text-white group-hover:text-red-800"></ion-icon></button>
                 </form>
             </div>

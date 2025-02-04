@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Property;
 use App\Models\RegisterRequest;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\PropertyImage;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,7 +15,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Property::factory(100)->create();
+        PropertyImage::factory(100)->create();
         RegisterRequest::factory(100)->create();
+        User::factory()->admin()->create();
     }
 }

@@ -9,9 +9,59 @@ use App\Http\Controllers\RegisterRequestController;
 use App\Http\Controllers\PropertyImageController;
 use App\Http\Controllers\PropertyVideoController;
 use App\Models\RegisterRequest;
-use Illuminate\Support\Facades\Auth;
 
-Route::view('/', 'home')->name('home');
+Route::get('/', function () {
+    $counties = [
+        "Baringo",
+        "Bomet",
+        "Bungoma",
+        "Busia",
+        "Elgeyo Marakwet",
+        "Embu",
+        "Garissa",
+        "Homa Bay",
+        "Isiolo",
+        "Kajiado",
+        "Kakamega",
+        "Kericho",
+        "Kiambu",
+        "Kilifi",
+        "Kirinyaga",
+        "Kisii",
+        "Kisumu",
+        "Kitui",
+        "Kwale",
+        "Laikipia",
+        "Lamu",
+        "Machakos",
+        "Makueni",
+        "Mandera",
+        "Marsabit",
+        "Meru",
+        "Migori",
+        "Mombasa",
+        "Murang'a",
+        "Nairobi",
+        "Nakuru",
+        "Nandi",
+        "Narok",
+        "Nyamira",
+        "Nyandarua",
+        "Nyeri",
+        "Samburu",
+        "Siaya",
+        "Taita Taveta",
+        "Tana River",
+        "Tharaka Nithi",
+        "Trans Nzoia",
+        "Turkana",
+        "Uasin Gishu",
+        "Vihiga",
+        "Wajir",
+        "West Pokot"
+    ];
+    return view('home', ['counties' => $counties]);
+})->name('home');
 Route::view('/about-us', 'about-us')->name('aboutUs');
 Route::view('/contact-us', 'contact-us')->name('contactUs');
 
@@ -39,6 +89,8 @@ Route::controller(AuthController::class)->group(function () {
 
     Route::get('/login', 'login')->name('login');
     Route::get('/signup', 'signup')->name('signup');
+
+    Route::delete('/user/delete/{id}', 'destroy')->name('destroy.user');
 
     Route::get('/auth/{provider}/redirect', 'redirectToProvider')->name('social.redirect');
     Route::get('/auth/{provider}/callback', 'handleProviderCallback')->name('social.callback');

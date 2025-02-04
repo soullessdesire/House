@@ -1,7 +1,13 @@
 <x-form.layout>
+
     <x-slot:height>
-        h-[1000px]
+        h-[1200px]
     </x-slot:height>
+    @session('error')
+    <div class="text-red text-sm font-primary">
+        There is a field you forgot to fill
+    </div>
+    @endsession
     <x-form.input type="text" name="title" id="title" placeholder="Title"></x-form.input>
     <textarea placeholder="Description" name="description" class="outline outline-black outline-1 xy-shadow-no-blur text-black bg-white w-5/6 h-[100px] rounded p-2 mb-2"></textarea>
     <x-form.input type="number" name="price" id="price" placeholder="Price"></x-form.input>

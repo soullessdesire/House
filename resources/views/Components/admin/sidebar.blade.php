@@ -4,8 +4,8 @@
         ['Dashboard', '/admin'],
         ['User Management', '/admin/user-management'],
         ['Property Management', '/admin/property-management'],
-        ['Settings', '/admin/settings'],
         ['User Register Request', '/admin/user-register-request'],
+        ['Settings', '/admin/settings'],
         ]
         @endphp
         <ul class="flex flex-col flex-no-wrap justify-center items-center gap-4">

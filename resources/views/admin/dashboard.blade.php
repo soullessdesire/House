@@ -13,37 +13,37 @@
                 <h1 class="text-xl">
                     New Users
                 </h1>
-                <p class="font-numbers text-5xl">100,230</p>
+                <p class="font-numbers text-5xl" data-finish="100,230"></p>
             </div>
             <div class="border text-black font-primary rounded p-2 shadow">
                 <h1 class="text-xl">
                     Properties Posted
                 </h1>
-                <p class="font-numbers text-5xl">100</p>
+                <p class="font-numbers text-5xl" data-finish="100"></p>
             </div>
             <div class="border text-black font-primary rounded p-2 shadow">
                 <h1 class="text-xl">
                     Payments This Month
                 </h1>
-                <p class="font-numbers text-5xl">450</p>
+                <p class="font-numbers text-5xl" data-finish="450"></p>
             </div>
             <div class="border text-black font-primary rounded p-2 shadow">
                 <h1 class="text-xl">
                     Bookings This Month
                 </h1>
-                <p class="font-numbers text-5xl">650</p>
+                <p class="font-numbers text-5xl" data-finish="650"></p>
             </div>
             <div class="border text-black font-primary rounded p-2 shadow">
                 <h1 class="text-xl">
                     Bookings Revenue
                 </h1>
-                <p class="font-numbers text-5xl">650,000</p>
+                <p class="font-numbers text-5xl" data-finish="650000"></p>
             </div>
             <div class="border text-black font-primary rounded p-2 shadow">
                 <h1 class="text-xl">
                     User Earnings
                 </h1>
-                <p class="font-numbers text-5xl">200,000</p>
+                <p class="font-numbers text-5xl" data-finish="200000"></p>
             </div>
             </div>
         </section>
@@ -81,4 +81,14 @@
         {!! $chart->container() !!}
     </section>
     {{ $chart->script() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const customDataPs = document.querySelectorAll('[data-finish]');
+            customDataPs.forEach(customDataP => {
+                customDataP.textContent = 1
+                const finishText = customDataP.getAttribute('data-finish');
+                customDataP.textContent = finishText
+            })
+        })
+    </script>
 </x-admin.layout>

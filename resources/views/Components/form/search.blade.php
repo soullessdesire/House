@@ -51,7 +51,7 @@ $counties = [
 @endphp
 
 
-<div {{$attributes->merge(['class' => "flex bg-white xy-shadow-no-blur border border-black text-black rounded-lg items-center rounded gap-6 relative pr-[10px]"])}}>
+<div {{$attributes->merge(['class' => "grid grid-cols-3 grid-rows-4 bg-white xy-shadow-no-blur border border-black text-black rounded-lg items-center rounded gap-6 relative pr-[10px]"])}}>
     <select name="county" id="county" class="font-primary w-full placeholder-black  h-[50px] rounded-lg ">
         <option value="">Select a county</option>
         @foreach ($counties as $county)

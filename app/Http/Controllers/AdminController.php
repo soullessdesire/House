@@ -21,11 +21,20 @@ class AdminController extends Controller
     }
     public function property_management()
     {
+        if (!Auth::user()) {
+            return abort(403);
+        }
         if (Auth::user()['role'] !== 'Admin') {
             return abort(403);
         }
         $chart = new SalesChart();
-        $properties = Property::all();
+        $query = Property::query();
+
+        if (request()->has('search')) {
+            $query->where('title', 'LIKE', '%' . request()->search . '%');
+        }
+
+        $properties = $query->with('images')->get();
         return view('admin.property_management', compact('chart', 'properties'));
     }
     public function user_management()
@@ -34,7 +43,11 @@ class AdminController extends Controller
             return abort(403);
         }
         $chart = new SalesChart();
-        $users = User::all();
+        $query = User::query();
+        if (request()->has('search')) {
+            $query->where('username', 'LIKE', '%' . request()->search . '%');
+        }
+        $users = $query->get();
         return view('admin.user_management', compact('chart', 'users'));
     }
     public function settings()

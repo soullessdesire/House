@@ -39,22 +39,24 @@
             {{ $chart->script() }}
         </div>
         <div class="p-2 shadow border rounded min-h-[400px] flex flex-col">
-            <div class="flex justify-between mb-2">
-                <input type="text" name="" id="" placeholder="Find User" class="text-black font-primary outline outline-1 outline-black xy-shadow-no-blur rounded h-[45px] w-4/6 px-3">
+            <form method="GET" action="{{route('user-management')}}" class="flex justify-between mb-2">
+                <input type="text" name="search" id="usr_filter" value="{{request('search')}}" placeholder="Find User" class="text-black font-primary outline outline-1 outline-black xy-shadow-no-blur rounded h-[45px] w-4/6 px-3">
                 <button type="submit" class="xy-shadow-no-blur rounded border border-black flex justify-center items-center px-2">
                     <ion-icon name="search" class="text-black"></ion-icon>
                 </button>
-            </div>
-            <div class="rounded border shadow min-h-[300px] flex-grow overflow-scroll-y">
+            </form>
+            <div class="rounded border border-black max-h-[400px] flex-grow overflow-y-scroll flex flex-col gap-2 p-2">
                 @foreach ($users as $user)
-                <div>
-                    <div></div>
-                    <div>
-                        <h1>{{$user->username}}</h1>
-                        <p>{{$user->email}}</p>
+                <div class="flex justify-between rounded border xy-shadow-no-blur items-center px-2">
+                    <ion-icon name="person-circle-outline"></ion-icon>
+                    <div class="flex flex-col gap-2 justify-center items-center">
+                        <h1 class="font-secondary text-lg">{{$user->username}}</h1>
+                        <p class="font-primary text-xs text-neutral-500">{{$user->email}}</p>
                     </div>
-                    <form action="">
-                        button
+                    <form action="{{ route('destroy.user', ['id' => $user->id])}}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="bg-red-800 border border-red-800 text-white rounded transition transition-all duration-300 hover:bg-transparent hover:text-red-800 px-2 py-1 group"><ion-icon name="close-outline" class="text-white group-hover:text-red-800 text-md"></ion-icon></button>
                     </form>
                 </div>
                 @endforeach

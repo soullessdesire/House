@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use App\Models\User;
 use App\Models\RegisterRequest;
@@ -13,10 +11,16 @@ class AuthController extends Controller
 {
     public function login()
     {
+        if (Auth::user()) {
+            return redirect()->back();
+        }
         return view('auth.login');
     }
     public function signup()
     {
+        if (Auth::user()) {
+            return redirect()->back();
+        }
         return view('auth.signup');
     }
     public function register()
@@ -59,34 +63,16 @@ class AuthController extends Controller
 
         return redirect()->route('property');
     }
-    public function redirectToProvider($provider)
+
+
+    public function destory($id)
     {
-        return Socialite::driver($provider)->redirect();
-    }
-
-    public function handleProviderCallback($provider)
-    {
-        try {
-            $socialUser = Socialite::driver($provider)->stateless()->user();
-            $user = User::where('email', $socialUser->getEmail())->first();
-
-            if (!$user) {
-                $user = User::create([
-                    'name' => $socialUser->getName(),
-                    'email' => $socialUser->getEmail(),
-                    'provider' => $provider,
-                    'provider_id' => $socialUser->getId(),
-                    'avatar' => $socialUser->getAvatar(),
-                ]);
-            }
-
-            Auth::login($user);
-
-            return redirect()->route('home');
-        } catch (\Exception $e) {
-            Log::error('Socialite error', ['error' => $e->getMessage()]);
-            dd($e, $e->getMessage());
-            return redirect()->route('login')->withErrors(['error' => 'Something went wrong!']);
+        if (Auth::user()['role'] === 'Admin') {
+            return redirect()->route('dashboard');
         }
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return response()->json(['success' => 'User was deleted successfully'], 200);
     }
 }

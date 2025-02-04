@@ -21,6 +21,7 @@ class PropertyController extends Controller
         $budget = request()->input('budget');
         $bedrooms = request()->input('bedrooms', []);
 
+
         $query = Property::query();
 
         if ($county) {
@@ -30,17 +31,11 @@ class PropertyController extends Controller
         }
 
         if ($budget) {
-            $budgetRanges = [
-                'price-1' => [0, 2500],
-                'price-2' => [2501, 5000],
-                'price-3' => [5001, 7500],
-                'price-4' => [7501, 10000],
-                'price-5' => [10000, 15000],
-                'price-6' => [15000, 30000],
-            ];
+            list($min, $max) = array_map('intval', explode(' - ', $budget));
+
 
             if (isset($budgetRanges[$budget])) {
-                $query->whereBetween('price', $budgetRanges[$budget]);
+                $query->whereBetween('price', [$min, $max]);
             }
         }
 
@@ -60,10 +55,16 @@ class PropertyController extends Controller
     }
     public function createMeta()
     {
+        if (!Auth::user()) {
+            abort(403);
+        }
         return view('property.form.metadata');
     }
     public function createMedia()
     {
+        if (!Auth::user()) {
+            abort(403);
+        }
         return view('property.form.mediadata');
     }
     public function imageStore(Property $property, Request $request)
@@ -132,10 +133,7 @@ class PropertyController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return response()->json([
-                    'error' => 'Validation error in session data',
-                    'details' => $validator->errors(),
-                ], 422);
+                return redirect()->route('property.create.meta')->with('error', 'There is a field you forgot to fill');
             }
             $price = $sessionData['price'];
             $bedrooms  = $sessionData['bedrooms'];
