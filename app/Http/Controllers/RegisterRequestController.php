@@ -6,16 +6,19 @@ use App\Models\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterRequestController extends Controller
 {
 
     public function show()
     {
+        $this->authorize('admin', Auth::user());
         return view('admin.register_request', ['requests' => RegisterRequest::all()]);
     }
     public function accept_request(RegisterRequest $registerRequest)
     {
+        $this->authorize('admin', Auth::user());
         $attributes = $registerRequest->validated();
 
         try {
@@ -34,6 +37,7 @@ class RegisterRequestController extends Controller
     }
     public function deny_request(RegisterRequest $registerRequest)
     {
+        $this->authorize('admin', Auth::user());
         try {
             $registerRequest->delete();
         } catch (Exception $e) {

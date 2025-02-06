@@ -104,17 +104,24 @@
 
             budgetLabels.forEach(label => {
                 const input = label.querySelector('input');
-                input.addEventListener('change', () => {
-                    budgetLabels.forEach(l => l.classList.remove('checked-outline'));
+
+                input.addEventListener('click', (event) => {
                     if (input.checked) {
-                        label.classList.add('checked-outline');
+                        if (label.classList.contains('checked-outline')) {
+                            input.checked = false;
+                            label.classList.remove('checked-outline');
+                        } else {
+                            budgetLabels.forEach(l => l.classList.remove('checked-outline'));
+                            label.classList.add('checked-outline');
+                        }
                     }
                 });
             });
 
             bedroomLabels.forEach(label => {
                 const input = label.querySelector('input');
-                input.addEventListener('change', () => {
+
+                input.addEventListener('click', () => {
                     if (input.checked) {
                         label.classList.add('checked-outline');
                     } else {

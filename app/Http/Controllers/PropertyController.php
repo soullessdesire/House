@@ -42,20 +42,30 @@ class PropertyController extends Controller
         $budget = request()->input('budget');
         $bedrooms = request()->input('bedrooms', []);
 
+        $filters = [
+            'county' => $county,
+            'subcounty' => $subcounty,
+            'constituency' => $constituency,
+            'ward' => $ward,
+            'location' => $location,
+            'sublocation' => $sublocation,
+            'village' => $village
+        ];
+
 
         $query = Property::query();
+        $query->whereHas('location', function ($query) use ($filters) {
+            foreach ($filters as $column => $value) {
+                if (!empty($value)) {
+                    if (in_array($column, ['location', 'sublocation', 'village'])) {
+                        $query->where($column, 'LIKE', '%' . $value . '%');
+                    } else {
+                        $query->where($column, $value);
+                    }
+                }
+            }
+        });
 
-        if ($county) {
-            $query->whereHas('location', function ($query) use ($county, $subcounty, $constituency, $ward, $location, $sublocation, $village) {
-                $query->where('county', $county)
-                    ->where('subcounty', $subcounty)
-                    ->where('constituency', $constituency)
-                    ->where('ward', $ward)
-                    ->where('location', 'LIKE', '%' . $location . '%')
-                    ->where('sublocation', 'LIKE', '%' . $sublocation . '%')
-                    ->where('village', 'LIKE', '%' . $village . '%');
-            });
-        }
 
         if ($budget) {
             list($min, $max) = array_map('intval', explode(' - ', $budget));

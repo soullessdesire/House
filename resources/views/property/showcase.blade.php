@@ -5,8 +5,22 @@
     <x-navbar.navbar></x-navbar.navbar>
     <br>
     <section class="w-full flex">
-        <img id="bigImage" src=" {{ asset('assets/images/image 2.jpeg')}} " alt="" class="object-cover rounded w-1/2 mr-4 w-[575px] h-[370px] transition transition-all duration-300">
+        <div class="relative mr-4 w-1/2 md:h-[400px] lg:h-[500px]">
+            <button type="button" class="absolute top-1/2 left-0 -transform-y-1/2">
+                <ion-icon name="chevron-back-outline" class="text-white text-2xl"></ion-icon>
+            </button>
+            <button type="button" class="absolute top-1/2 left-1/2 -transform-y-1/2 -transform-x-1/2" id="play-button">
+                <ion-icon name="play" class="text-white text-2xl"></ion-icon>
+            </button>
+            <img id="bigImage" src=" {{ asset('assets/images/image 2.jpeg')}} " alt="" class="object-cover rounded w-full h-full transition-all duration-300">
+            <button type="button" class="absolute top-1/2 right-0 -transform-y-1/2">
+                <ion-icon name="chevron-forward-outline" class="text-white text-2xl"></ion-icon>
+            </button>
+        </div>
         <section class="grow">
+            <h1 class="text-2xl text-black font-primary mb-6">
+                {{$property->title}}
+            </h1>
             <p class="text-sm text-neutral-500 font-secondary mb-10">
                 {{ $property->description }}
             </p>
@@ -92,6 +106,7 @@
             const overlay = document.getElementById('overlay');
             const bigImage = document.getElementById('bigImage');
             const gallery = document.getElementById('gallery');
+            const playButton = document.getElementById('play-button');
 
             const toggleSidebar = () => {
                 sidebar.classList.toggle('translate-x-full');
@@ -108,16 +123,33 @@
                 }
             };
             const changeImage = (event) => {
-                bigImage.style.opacity = '0'
+                bigImage.style.opacity = 0
                 setTimeout(() => {
                     bigImage.src = event.target.src;
-                    bigImage.style.opacity = '100%';
+                    bigImage.style.opacity = 100
                 }, 200);
+            }
+
+            const play = () => {
+                playButton.style.opacity = 0
+
+                function toggleIcon() {
+                    const playIcon = '<ion-icon name="play" class="text-white text-2xl"></ion-icon>'
+                    const pauseIcon = '<ion-icon name="pause" class="text-white text-2xl"></ion-icon>'
+                    if (playButton.innerHTML == playIcon) playButton.innerHTML = pauseIcon
+                    else playButton.innerHTML = playIcon
+                }
+                setTimeout(() => {
+                    toggleIcon()
+                    playButton.style.opacity = 100
+                })
             }
 
             gallery.addEventListener('click', changeImage);
             toggleButton.addEventListener('click', toggleSidebar);
             document.addEventListener('click', closeSidebarOnClickOutside);
+
+
         });
     </script>
     <x-footer></x-footer>

@@ -48,7 +48,20 @@
         <x-form.input type="text" name="title" id="title" placeholder="Title" value="{{$property->title}}"></x-form.input>
         <textarea placeholder="Description" name="description" class="outline outline-black outline-1 xy-shadow-no-blur text-black bg-white w-5/6 h-[150px] font-primary rounded p-2 mb-2"> {{$property->description}}</textarea>
         <x-form.input type="number" name="price" id="price" placeholder="Price" value="{{$property->price}}"></x-form.input>
-        <x-form.input type="number" name="bedrooms" id="bedrooms" placeholder="Bedrooms" max="6" min="1" value="{{$property->bedrooms}}"></x-form.input>
+        <select class="outline outline-1 outline-black p-2 h-[50px] w-[150px] rounded" name="bedrooms" id="bedrooms" class="form-control">
+            @foreach([
+            '0' => 'Bedsitter',
+            '0.5' => 'Single Room',
+            '1' => 'One Bedroom',
+            '2' => 'Two Bedroom',
+            '3' => 'Three Bedroom',
+            '4' => 'Four Bedroom'
+            ] as $value => $label)
+            <option value="{{ $value }}" {{ $property->bedrooms == $value ? 'selected' : '' }}>
+                {{ $label }}
+            </option>
+            @endforeach
+        </select>
         <x-form.location :property="$property"></x-form.location>
     </form>
     <div id='imagedisplay' class="w-full h-[400px] rounded bg-black px-4 py-2 mb-3 ">

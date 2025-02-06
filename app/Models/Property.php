@@ -21,10 +21,6 @@ class Property extends Model
     {
         return $this->belongsTo(Location::class);
     }
-    public function feature()
-    {
-        return $this->hasMany(PropertyFeature::class);
-    }
     public function images()
     {
         return $this->hasMany(PropertyImage::class);
