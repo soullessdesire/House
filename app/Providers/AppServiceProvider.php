@@ -5,14 +5,15 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Models\User;
 use App\Models\Property;
-use App\Policies\AdminPolicy;
+use App\Policies\UserPolicy;
 use App\Policies\PropertyPolicy;
 
 class AppServiceProvider extends ServiceProvider
 {
     protected $policies = [
         Property::class => PropertyPolicy::class,
-        User::class => AdminPolicy::class
+        User::class => UserPolicy::class,
+
     ];
     /**
      * Register any application services.

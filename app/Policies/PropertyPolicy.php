@@ -4,8 +4,7 @@ namespace App\Policies;
 
 use App\Models\Property;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
-use Illuminate\Support\Facades\Auth;
+
 
 class PropertyPolicy
 {
@@ -22,6 +21,6 @@ class PropertyPolicy
      */
     public function delete(User $user, Property $property): bool
     {
-        return $property->owner()->is($user);
+        return $property->owner()->is($user) || $user->isAdmin();
     }
 }

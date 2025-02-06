@@ -1,891 +1,445 @@
 <?php
 
-use Ramsey\Collection\Map\AssociativeArrayMap;
+namespace App\Http\Controllers;
 
-class Location
+
+class LocationController extends Controller
 {
-    public static ?AssociativeArrayMap $locations = [
-        (object) [
-            'county_code' => 3,
-            'name' => 'Kisumu',
-            'constituencies' => (object) [
-                [
-                    'name' => 'Kisumu Central',
-                    'subcounties' => [
-                        [
-                            'name' => 'Kisumu Central Sub-County',
-                            'wards' => [
-                                [
-                                    'name' => 'Kisumu Town East',
-                                    'locations' => [
-                                        [
-                                            'name' => 'Kisumu East',
-                                            'sublocations' => [
-                                                [
-                                                    'name' => 'Harambee',
-                                                    'villages' => ['Nyalenda', 'Kibuye']
-                                                ],
-                                                [
-                                                    'name' => 'Kisumu Central',
-                                                    'villages' => ['Otieno Ng’ama']
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ],
-                                [
-                                    'name' => 'Kisumu Town West',
-                                    'locations' => [
-                                        [
-                                            'name' => 'Kisumu West',
-                                            'sublocations' => [
-                                                [
-                                                    'name' => 'Wamalwa',
-                                                    'villages' => ['Kabonyo']
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ],
-                [
-                    'name' => 'Nyakach',
-                    'subcounties' => [
-                        [
-                            'name' => 'Nyakach Sub-County',
-                            'wards' => [
-                                [
-                                    'name' => 'Kogony',
-                                    'locations' => [
-                                        [
-                                            'name' => 'Kogony North',
-                                            'sublocations' => [
-                                                [
-                                                    'name' => 'Kogony Town',
-                                                    'villages' => ['Nyamatia']
-                                                ],
-                                                [
-                                                    'name' => 'Kogony South',
-                                                    'villages' => ['Kisumu Port', 'Rabuor']
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ],
-                                [
-                                    'name' => 'Kadel',
-                                    'locations' => [
-                                        [
-                                            'name' => 'Kadel West',
-                                            'sublocations' => [
-                                                [
-                                                    'name' => 'Kisian',
-                                                    'villages' => ['Kodero']
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ],
-                [
-                    'name' => 'Kisumu East',
-                    'subcounties' => [
-                        [
-                            'name' => 'Kisumu East Sub-County',
-                            'wards' => [
-                                [
-                                    'name' => 'Ahero',
-                                    'locations' => [
-                                        [
-                                            'name' => 'Ahero Town',
-                                            'sublocations' => [
-                                                [
-                                                    'name' => 'Ahero Market',
-                                                    'villages' => ['Kondele']
-                                                ],
-                                                [
-                                                    'name' => 'Kisian',
-                                                    'villages' => ['Rong’']
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ],
-                                [
-                                    'name' => 'Koguta',
-                                    'locations' => [
-                                        [
-                                            'name' => 'Koguta Central',
-                                            'sublocations' => [
-                                                [
-                                                    'name' => 'Nyamware',
-                                                    'villages' => ['Kisumu Rural']
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-        ],
-        (object) [
-            'id' => 2,
-            'name' => 'Mombasa',
-            'constituencies' => [
-                (object) [
-                    'name' => 'Mvita',
-                    'subcounties' => [
-                        (object) [
-                            'name' => 'Mvita Sub-County',
-                            'wards' => [
-                                (object) [
-                                    'name' => 'Tudor',
-                                    'locations' => [
-                                        (object) [
-                                            'name' => 'Tudor East',
-                                            'sublocations' => [
-                                                (object) [
-                                                    'name' => 'Sabasaba',
-                                                    'villages' => ['Sabasaba Market', 'Kiziwi Junction']
-                                                ],
-                                                (object) [
-                                                    'name' => 'Kiziwi',
-                                                    'villages' => ['Kiziwi Flats', 'Tudor Water Supply']
-                                                ]
-                                            ]
-                                        ],
-                                        (object) [
-                                            'name' => 'Tudor West',
-                                            'sublocations' => [
-                                                (object) [
-                                                    'name' => 'Makupa',
-                                                    'villages' => ['Makupa Police Line', 'Makupa Causeway']
-                                                ],
-                                                (object) [
-                                                    'name' => 'Tudor Flats',
-                                                    'villages' => ['Tudor Phase 1', 'Tudor Phase 2']
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ],
-                                (object) [
-                                    'name' => 'Majengo',
-                                    'locations' => [
-                                        (object) [
-                                            'name' => 'Majengo Central',
-                                            'sublocations' => [
-                                                (object) [
-                                                    'name' => 'Marikiti',
-                                                    'villages' => ['Marikiti Market', 'Bondeni Lane']
-                                                ],
-                                                (object) [
-                                                    'name' => 'Bondeni',
-                                                    'villages' => ['Bondeni Mosque Area', 'Mombasa Baptist']
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ],
-                (object) [
-                    'name' => 'Nyali',
-                    'subcounties' => [
-                        (object) [
-                            'name' => 'Nyali Sub-County',
-                            'wards' => [
-                                (object) [
-                                    'name' => 'Kongowea',
-                                    'locations' => [
-                                        (object) [
-                                            'name' => 'Kongowea North',
-                                            'sublocations' => [
-                                                (object) [
-                                                    'name' => 'Mlaleo',
-                                                    'villages' => ['Mlaleo Phase 1', 'Mlaleo Phase 2']
-                                                ],
-                                                (object) [
-                                                    'name' => 'Kongowea Market',
-                                                    'villages' => ['Kongowea Main Market', 'Market Perimeter']
-                                                ]
-                                            ]
-                                        ],
-                                        (object) [
-                                            'name' => 'Kongowea South',
-                                            'sublocations' => [
-                                                (object) [
-                                                    'name' => 'Ziwa La Ng’ombe',
-                                                    'villages' => ['Ziwa A', 'Ziwa B']
-                                                ],
-                                                (object) [
-                                                    'name' => 'Kisimani',
-                                                    'villages' => ['Kisimani Central', 'Kisimani West']
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ],
-                                (object) [
-                                    'name' => 'Mkomani',
-                                    'locations' => [
-                                        (object) [
-                                            'name' => 'Mkomani Central',
-                                            'sublocations' => [
-                                                (object) [
-                                                    'name' => 'English Point',
-                                                    'villages' => ['English Point Marina', 'Nyali Bridge Area']
-                                                ],
-                                                (object) [
-                                                    'name' => 'Nyali Beach',
-                                                    'villages' => ['Nyali Beach Hotels', 'Bamburi Road Area']
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ],
-                (object) [
-                    'name' => 'Likoni',
-                    'subcounties' => [
-                        (object) [
-                            'name' => 'Likoni Sub-County',
-                            'wards' => [
-                                (object) [
-                                    'name' => 'Mtongwe',
-                                    'locations' => [
-                                        (object) [
-                                            'name' => 'Mtongwe East',
-                                            'sublocations' => [
-                                                (object) [
-                                                    'name' => 'Mtongwe Navy Base',
-                                                    'villages' => ['Navy Barracks', 'Mtongwe Ferry']
-                                                ],
-                                                (object) [
-                                                    'name' => 'Likoni Heights',
-                                                    'villages' => ['Likoni Flats', 'Likoni Shopping Center']
-                                                ]
-                                            ]
-                                        ],
-                                        (object) [
-                                            'name' => 'Mtongwe West',
-                                            'sublocations' => [
-                                                (object) [
-                                                    'name' => 'Shika Adabu',
-                                                    'villages' => ['Shika Adabu Main', 'Shika Adabu Market']
-                                                ],
-                                                (object) [
-                                                    'name' => 'Vijiweni',
-                                                    'villages' => ['Vijiweni Central', 'Vijiweni East']
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ],
-                                (object) [
-                                    'name' => 'Likoni Ward',
-                                    'locations' => [
-                                        (object) [
-                                            'name' => 'Likoni Central',
-                                            'sublocations' => [
-                                                (object) [
-                                                    'name' => 'Shelly Beach',
-                                                    'villages' => ['Shelly Beach Resort', 'Dongo Kundu']
-                                                ],
-                                                (object) [
-                                                    'name' => 'Timboni',
-                                                    'villages' => ['Timboni A', 'Timboni B']
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-        ],
-        (object) [
-            'id' => 47,
-            'name' => 'Nairobi',
-            'constituencies' => [
-                (object) [
-                    'name' => 'Westlands',
-                    'subcounties' => [
-                        (object) [
-                            'name' => 'Westlands Sub-County',
-                            'wards' => [
-                                (object) [
-                                    'name' => 'Parklands',
-                                    'locations' => [
-                                        (object) [
-                                            'name' => 'Parklands East',
-                                            'sublocations' => [
-                                                (object) [
-                                                    'name' => 'City Park',
-                                                    'villages' => ['Aga Khan Area', 'Muthaiga Square']
-                                                ],
-                                                (object) [
-                                                    'name' => 'Highridge',
-                                                    'villages' => ['Diamond Plaza Area', 'Jamhuri High']
-                                                ]
-                                            ]
-                                        ],
-                                        (object) [
-                                            'name' => 'Parklands West',
-                                            'sublocations' => [
-                                                (object) [
-                                                    'name' => 'Kusi Lane',
-                                                    'villages' => ['Wangari Maathai Road', 'Westlands Square']
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ],
-                                (object) [
-                                    'name' => 'Mountain View',
-                                    'locations' => [
-                                        (object) [
-                                            'name' => 'Mountain View Central',
-                                            'sublocations' => [
-                                                (object) [
-                                                    'name' => 'Lower Mountain View',
-                                                    'villages' => ['Sunrise Estate', 'Kangemi Area']
-                                                ],
-                                                (object) [
-                                                    'name' => 'Upper Mountain View',
-                                                    'villages' => ['Nyayo Estate', 'Spring Valley']
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ],
-                (object) [
-                    'name' => 'Dagoretti North',
-                    'subcounties' => [
-                        (object) [
-                            'name' => 'Dagoretti North Sub-County',
-                            'wards' => [
-                                (object) [
-                                    'name' => 'Kilimani',
-                                    'locations' => [
-                                        (object) [
-                                            'name' => 'Kilimani East',
-                                            'sublocations' => [
-                                                (object) [
-                                                    'name' => 'State House',
-                                                    'villages' => ['Hurlingham', 'Kileleshwa']
-                                                ],
-                                                (object) [
-                                                    'name' => 'Yaya',
-                                                    'villages' => ['Prestige Plaza Area', 'Ngong Avenue']
-                                                ]
-                                            ]
-                                        ],
-                                        (object) [
-                                            'name' => 'Kilimani West',
-                                            'sublocations' => [
-                                                (object) [
-                                                    'name' => 'Adams Arcade',
-                                                    'villages' => ['Toi Market', 'Joseph Kangethe']
-                                                ],
-                                                (object) [
-                                                    'name' => 'Ngong Road',
-                                                    'villages' => ['Lenana School Area', 'Junction Mall']
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ],
-                                (object) [
-                                    'name' => 'Kawangware',
-                                    'locations' => [
-                                        (object) [
-                                            'name' => 'Kawangware Central',
-                                            'sublocations' => [
-                                                (object) [
-                                                    'name' => 'Stage 56',
-                                                    'villages' => ['Ndwaru Road', 'Muthurwa']
-                                                ],
-                                                (object) [
-                                                    'name' => 'Kandutu',
-                                                    'villages' => ['Gatina', 'Riruta Satellite']
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ],
-                (object) [
-                    'name' => 'Lang’ata',
-                    'subcounties' => [
-                        (object) [
-                            'name' => 'Lang’ata Sub-County',
-                            'wards' => [
-                                (object) [
-                                    'name' => 'Karen',
-                                    'locations' => [
-                                        (object) [
-                                            'name' => 'Karen Plains',
-                                            'sublocations' => [
-                                                (object) [
-                                                    'name' => 'Hardy',
-                                                    'villages' => ['Bogani', 'Ngong Racecourse']
-                                                ],
-                                                (object) [
-                                                    'name' => 'Miotoni',
-                                                    'villages' => ['Waterfront', 'Karen Blixen Museum Area']
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ],
-                                (object) [
-                                    'name' => 'South C',
-                                    'locations' => [
-                                        (object) [
-                                            'name' => 'South C East',
-                                            'sublocations' => [
-                                                (object) [
-                                                    'name' => 'Akila Estate',
-                                                    'villages' => ['Nairobi West', 'Boma Hotel Area']
-                                                ],
-                                                (object) [
-                                                    'name' => 'Wilson Airport',
-                                                    'villages' => ['Lang’ata Road', 'South C Shopping Center']
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-        ],
-        [
-            'county_code' => 12,
-            'name' => 'Meru',
-            'constituencies' => [
-                [
-                    'name' => 'Imenti North',
-                    'subcounties' => [
-                        [
-                            'name' => 'Imenti North Sub-County',
-                            'locations' => [
-                                [
-                                    'name' => 'Ntima East',
-                                    'sublocations' => [
-                                        [
-                                            'name' => 'Gakoromone',
-                                            'villages' => ['Kinoru', 'Gakoromone Market']
-                                        ],
-                                        [
-                                            'name' => 'Kithoka',
-                                            'villages' => ['Kithoka Farm', 'Kiruka']
-                                        ]
-                                    ]
-                                ],
-                                [
-                                    'name' => 'Ntima West',
-                                    'sublocations' => [
-                                        [
-                                            'name' => 'Mwendantu',
-                                            'villages' => ['Meru Town', 'Makutano']
-                                        ]
-                                    ]
-                                ]
-                            ],
-                            'wards' => [
-                                [
-                                    'name' => 'Municipality',
-                                    'sublocations' => [
-                                        [
-                                            'name' => 'Meru Central',
-                                            'villages' => ['Gakoromone', 'Majengo']
-                                        ]
-                                    ]
-                                ],
-                                [
-                                    'name' => 'Nyaki West',
-                                    'sublocations' => [
-                                        [
-                                            'name' => 'Nyaki',
-                                            'villages' => ['Kaithe', 'Ruiri']
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ],
-                [
-                    'name' => 'Imenti South',
-                    'subcounties' => [
-                        [
-                            'name' => 'Imenti South Sub-County',
-                            'locations' => [
-                                [
-                                    'name' => 'Abothuguchi Central',
-                                    'sublocations' => [
-                                        [
-                                            'name' => 'Kiija',
-                                            'villages' => ['Chogoria', 'Kirimba']
-                                        ]
-                                    ]
-                                ],
-                                [
-                                    'name' => 'Mitunguu',
-                                    'sublocations' => [
-                                        [
-                                            'name' => 'Mitunguu',
-                                            'villages' => ['Mitunguu Market', 'Nkubu']
-                                        ]
-                                    ]
-                                ]
-                            ],
-                            'wards' => [
-                                [
-                                    'name' => 'Abogeta West',
-                                    'sublocations' => [
-                                        [
-                                            'name' => 'Abogeta',
-                                            'villages' => ['Igoki', 'Chugu']
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ],
-                [
-                    'name' => 'Buuri',
-                    'subcounties' => [
-                        [
-                            'name' => 'Buuri Sub-County',
-                            'locations' => [
-                                [
-                                    'name' => 'Timau',
-                                    'sublocations' => [
-                                        [
-                                            'name' => 'Timau Central',
-                                            'villages' => ['Timau Town', 'Kiirua']
-                                        ]
-                                    ]
-                                ]
-                            ],
-                            'wards' => [
-                                [
-                                    'name' => 'Timau',
-                                    'sublocations' => [
-                                        [
-                                            'name' => 'Timau West',
-                                            'villages' => ['Timau Trading Center', 'Ngusishi']
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-        ],
-        [
-            'county_code' => 22,
-            'name' => 'Kiambu',
-            'constituencies' => [
-                [
-                    'name' => 'Kiambaa',
-                    'subcounties' => [
-                        [
-                            'name' => 'Kiambaa Sub-County',
-                            'locations' => [
-                                [
-                                    'name' => 'Karuri',
-                                    'sublocations' => [
-                                        [
-                                            'name' => 'Muchatha',
-                                            'villages' => ['Gacharage', 'Ndenderu']
-                                        ],
-                                        [
-                                            'name' => 'Ruaka',
-                                            'villages' => ['Ruaka Market', 'Rosslyn']
-                                        ]
-                                    ]
-                                ]
-                            ],
-                            'wards' => [
-                                [
-                                    'name' => 'Karuri',
-                                    'sublocations' => [
-                                        [
-                                            'name' => 'Karuri Central',
-                                            'villages' => ['Karuri Town', 'Gitathuru']
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ],
-                [
-                    'name' => 'Gatundu South',
-                    'subcounties' => [
-                        [
-                            'name' => 'Gatundu South Sub-County',
-                            'locations' => [
-                                [
-                                    'name' => 'Kiamwangi',
-                                    'sublocations' => [
-                                        [
-                                            'name' => 'Kiamwangi Central',
-                                            'villages' => ['Kiamwangi Market', 'Githunguri']
-                                        ]
-                                    ]
-                                ],
-                                [
-                                    'name' => 'Ndarugo',
-                                    'sublocations' => [
-                                        [
-                                            'name' => 'Ndarugo East',
-                                            'villages' => ['Muthaiga', 'Njiruini']
-                                        ]
-                                    ]
-                                ]
-                            ],
-                            'wards' => [
-                                [
-                                    'name' => 'Kiamwangi',
-                                    'sublocations' => [
-                                        [
-                                            'name' => 'Kiamwangi West',
-                                            'villages' => ['Nembu', 'Mukuyu']
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ],
-                [
-                    'name' => 'Ruiru',
-                    'subcounties' => [
-                        [
-                            'name' => 'Ruiru Sub-County',
-                            'locations' => [
-                                [
-                                    'name' => 'Ruiru Town',
-                                    'sublocations' => [
-                                        [
-                                            'name' => 'Ruiru Central',
-                                            'villages' => ['Githurai', 'Toll']
-                                        ],
-                                        [
-                                            'name' => 'Ruiru East',
-                                            'villages' => ['Mugutha', 'Kwa Maiko']
-                                        ]
-                                    ]
-                                ]
-                            ],
-                            'wards' => [
-                                [
-                                    'name' => 'Biashara',
-                                    'sublocations' => [
-                                        [
-                                            'name' => 'Biashara Central',
-                                            'villages' => ['Kimbo', 'Membley']
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ],
-                [
-                    'name' => 'Thika Town',
-                    'subcounties' => [
-                        [
-                            'name' => 'Thika Sub-County',
-                            'locations' => [
-                                [
-                                    'name' => 'Kamenu',
-                                    'sublocations' => [
-                                        [
-                                            'name' => 'Kamenu East',
-                                            'villages' => ['Section 9', 'Makongeni']
-                                        ]
-                                    ]
-                                ]
-                            ],
-                            'wards' => [
-                                [
-                                    'name' => 'Kamenu',
-                                    'sublocations' => [
-                                        [
-                                            'name' => 'Kamenu Central',
-                                            'villages' => ['Githurai Kimbo', 'Ndovoini']
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-        ],
-        [
-            'county_code' => 19,
-            'name' => 'Nyeri',
-            'constituencies' => [
-                [
-                    'name' => 'Nyeri Town',
-                    'subcounties' => [
-                        [
-                            'name' => 'Nyeri Central Sub-County',
-                            'locations' => [
-                                [
-                                    'name' => 'Rware',
-                                    'sublocations' => [
-                                        [
-                                            'name' => 'Majengo',
-                                            'villages' => ['Blue Valley', 'Skuta']
-                                        ],
-                                        [
-                                            'name' => 'Kamakwa',
-                                            'villages' => ['Mathari', 'Chania']
-                                        ]
-                                    ]
-                                ]
-                            ],
-                            'wards' => [
-                                [
-                                    'name' => 'Rware',
-                                    'sublocations' => [
-                                        [
-                                            'name' => 'Nyeri Central',
-                                            'villages' => ['Kimathi', 'Muringato']
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ],
-                [
-                    'name' => 'Tetu',
-                    'subcounties' => [
-                        [
-                            'name' => 'Tetu Sub-County',
-                            'locations' => [
-                                [
-                                    'name' => 'Wamagana',
-                                    'sublocations' => [
-                                        [
-                                            'name' => 'Wamagana North',
-                                            'villages' => ['Gatitu', 'Gitero']
-                                        ]
-                                    ]
-                                ]
-                            ],
-                            'wards' => [
-                                [
-                                    'name' => 'Wamagana',
-                                    'sublocations' => [
-                                        [
-                                            'name' => 'Wamagana Central',
-                                            'villages' => ['Kigogoini', 'Mahiga']
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ],
-                [
-                    'name' => 'Mathira',
-                    'subcounties' => [
-                        [
-                            'name' => 'Mathira East Sub-County',
-                            'locations' => [
-                                [
-                                    'name' => 'Karatina',
-                                    'sublocations' => [
-                                        [
-                                            'name' => 'Karatina Town',
-                                            'villages' => ['Kiangai', 'Gathugu']
-                                        ]
-                                    ]
-                                ]
-                            ],
-                            'wards' => [
-                                [
-                                    'name' => 'Karatina',
-                                    'sublocations' => [
-                                        [
-                                            'name' => 'Karatina South',
-                                            'villages' => ['Ihururu', 'Marua']
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ],
-                [
-                    'name' => 'Othaya',
-                    'subcounties' => [
-                        [
-                            'name' => 'Othaya Sub-County',
-                            'locations' => [
-                                [
-                                    'name' => 'Mahiga',
-                                    'sublocations' => [
-                                        [
-                                            'name' => 'Mahiga East',
-                                            'villages' => ['Mukurwe', 'Kanyange']
-                                        ]
-                                    ]
-                                ]
-                            ],
-                            'wards' => [
-                                [
-                                    'name' => 'Mahiga',
-                                    'sublocations' => [
-                                        [
-                                            'name' => 'Mahiga Central',
-                                            'villages' => ['Kiriaini', 'Gikondi']
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-        ],
-        []
-    ];
+    public static function getCounties()
+    {
+        return [
+            "Baringo",
+            "Bomet",
+            "Bungoma",
+            "Busia",
+            "Elgeyo Marakwet",
+            "Embu",
+            "Garissa",
+            "Homa Bay",
+            "Isiolo",
+            "Kajiado",
+            "Kakamega",
+            "Kericho",
+            "Kiambu",
+            "Kilifi",
+            "Kirinyaga",
+            "Kisii",
+            "Kisumu",
+            "Kitui",
+            "Kwale",
+            "Laikipia",
+            "Lamu",
+            "Machakos",
+            "Makueni",
+            "Mandera",
+            "Marsabit",
+            "Meru",
+            "Migori",
+            "Mombasa",
+            "Murang'a",
+            "Nairobi",
+            "Nakuru",
+            "Nandi",
+            "Narok",
+            "Nyamira",
+            "Nyandarua",
+            "Nyeri",
+            "Samburu",
+            "Siaya",
+            "Taita Taveta",
+            "Tana River",
+            "Tharaka Nithi",
+            "Trans Nzoia",
+            "Turkana",
+            "Uasin Gishu",
+            "Vihiga",
+            "Wajir",
+            "West Pokot"
+        ];
+    }
+    public static function getSubCounties()
+    {
+        return [
+            "Baringo Central",
+            "Baringo North",
+            "Baringo South",
+            "Eldama Ravine",
+            "Keiyo North",
+            "Keiyo South",
+            "Marakwet East",
+            "Marakwet West",
+            "Embu East",
+            "Embu North",
+            "Embu West",
+            "Mbeere North",
+            "Mbeere South",
+            "Isinya",
+            "Kajiado Central",
+            "Kajiado East",
+            "Kajiado North",
+            "Kajiado South",
+            "Kajiado West",
+            "Kakamega Central",
+            "Kakamega East",
+            "Kakamega North",
+            "Kakamega South",
+            "Kakamega West",
+            "Lugari",
+            "Malava",
+            "Likuyani",
+            "Kilifi North",
+            "Kilifi South",
+            "Kaloleni",
+            "Rabai",
+            "Ganze",
+            "Malindi",
+            "Magarini",
+            "Kitui Central",
+            "Kitui East",
+            "Kitui South",
+            "Kitui West",
+            "Mwingi Central",
+            "Mwingi East",
+            "Mwingi West",
+            "Laikipia Central",
+            "Laikipia East",
+            "Laikipia North",
+            "Laikipia West",
+            "Lamu East",
+            "Lamu West",
+            "Meru Central",
+            "Meru South",
+            "Igembe Central",
+            "Igembe North",
+            "Igembe South",
+            "Tigania East",
+            "Tigania West",
+            "Marsabit Central",
+            "Marsabit North",
+            "Marsabit South",
+            "Marsabit West",
+            "Mombasa Island",
+            "Changamwe",
+            "Jomvu",
+            "Kisauni",
+            "Likoni",
+            "Nyali",
+            "Nairobi West",
+            "Nairobi East",
+            "Nairobi North",
+            "Dagoretti",
+            "Lang’ata",
+            "Kibra",
+            "Kamukunji",
+            "Embakasi",
+            "Roysambu",
+            "Kasarani",
+            "Ruaraka",
+            "Westlands",
+            "Starehe",
+            "Mathare"
+        ];
+    }
+    public static function getCounstituency()
+    {
+        return  [
+            "Changamwe",
+            "Jomvu",
+            "Kisauni",
+            "Likoni",
+            "Mvita",
+            "Nyali",
+            "Kinango",
+            "Lunga Lunga",
+            "Matuga",
+            "Msambweni",
+            "Ganze",
+            "Kaloleni",
+            "Kilifi North",
+            "Kilifi South",
+            "Magarini",
+            "Malindi",
+            "Bahari",
+            "Rabai",
+            "Lamu East",
+            "Lamu West",
+            "Tana River",
+            "Tana North",
+            "Bura",
+            "Garissa Township",
+            "Balambala",
+            "Dadaab",
+            "Fafi",
+            "Ijara",
+            "Lagdera",
+            "Wajir East",
+            "Wajir West",
+            "Wajir North",
+            "Wajir South",
+            "Wajir West",
+            "Mandera East",
+            "Mandera North",
+            "Mandera South",
+            "Mandera West",
+            "Banissa",
+            "Marsabit",
+            "Laisamis",
+            "Moyale",
+            "Isiolo North",
+            "Isiolo South",
+            "Meru Central",
+            "Meru South",
+            "Igembe Central",
+            "Igembe North",
+            "Igembe South",
+            "Tigania East",
+            "Tigania West",
+            "Embu North",
+            "Embu East",
+            "Embu West",
+            "Mbeere North",
+            "Mbeere South",
+            "Tharaka",
+            "Nithi",
+            "Chuka",
+            "Igambang’ombe",
+            "Maara",
+            "Kitui Central",
+            "Kitui East",
+            "Kitui South",
+            "Kitui West",
+            "Mwingi Central",
+            "Mwingi East",
+            "Mwingi West",
+            "Machakos Town",
+            "Mavoko",
+            "Masinga",
+            "Yatta",
+            "Kangundo",
+            "Matungulu",
+            "Kathiani",
+            "Mbooni",
+            "Kaiti",
+            "Makueni",
+            "Kilome",
+            "Kibwezi East",
+            "Kibwezi West",
+            "Nairobi West",
+            "Nairobi East",
+            "Nairobi North",
+            "Dagoretti North",
+            "Dagoretti South",
+            "Embakasi East",
+            "Embakasi West",
+            "Embakasi Central",
+            "Embakasi South",
+            "Embakasi North",
+            "Kasarani",
+            "Ruaraka",
+            "Westlands",
+            "Starehe",
+            "Mathare",
+            "Kibra",
+            "Kamukunji",
+            "Lang’ata"
+        ];
+    }
+    public static function getWards()
+    {
+        return [
+            // Nairobi County
+            'Kitisuru',
+            'Parklands/Highridge',
+            'Karura',
+            'Kangemi',
+            'Mountain View',
+            'Kilimani',
+            'Kawangware',
+            'Gatina',
+            'Kileleshwa',
+            'Kabiro',
+            'Mutu-ini',
+            'Ngando',
+            'Riruta',
+            'Uthiru/Ruthimitu',
+            'Waithaka',
+            'Karen',
+            'Nairobi West',
+            'Mugumu-ini',
+            'South C',
+            'Nyayo Highrise',
+            'Laini Saba',
+            'Lindi',
+            'Makina',
+            'Woodley/Kenyatta Golf Course',
+            'Sarangombe',
+            'Githurai',
+            'Kahawa West',
+            'Zimmerman',
+            'Roysambu',
+            'Kahawa',
+            'Clay City',
+            'Mwiki',
+            'Kasarani',
+            'Njiru',
+            'Ruai',
+            'Baba Dogo',
+            'Utalii',
+            'Mathare North',
+            'Lucky Summer',
+            'Korogocho',
+            'Imara Daima',
+            'Kwa Njenga',
+            'Kwa Reuben',
+            'Pipeline',
+            'Kware',
+            'Kariobangi North',
+            'Dandora Area I',
+            'Dandora Area II',
+            'Dandora Area III',
+            'Dandora Area IV',
+            'Kayole North',
+            'Kayole Central',
+            'Kayole South',
+            'Komarock',
+            'Matopeni/Spring Valley',
+            'Upper Savannah',
+            'Lower Savannah',
+            'Embakasi',
+            'Utawala',
+            'Mihango',
+            'Umoja I',
+            'Umoja II',
+            'Mowlem',
+            'Kariobangi South',
+            'Maringo/Hamza',
+            'Maringo/Hamza',
+            'Viwandani',
+            'Harambee',
+            'Makongeni',
+            'Pumwani',
+            'Eastleigh North',
+            'Eastleigh South',
+            'Airbase',
+            'California',
+            'Ngara',
+            'Nairobi Central',
+            'Pangani',
+            'Ziwani/Kariokor',
+            'Landimawe',
+            'Nairobi South',
+            'Hospital',
+            'Mabatini',
+            'Huruma',
+            'Ngei',
+            'Mlango Kubwa',
+            'Kiamaiko',
+
+            // Kiambu County
+            'Kikuyu',
+            'Kabete',
+            'Limuru',
+            'Githunguri',
+            'Juja',
+            'Ruiru',
+            'Thika Town',
+            'Gatundu South',
+            'Gatundu North',
+            'Lari',
+
+            // Mombasa County
+            'Changamwe',
+            'Jomvu',
+            'Kisauni',
+            'Nyali',
+            'Likoni',
+            'Mvita',
+
+            // Kisumu County
+            'Kisumu East',
+            'Kisumu West',
+            'Kisumu Central',
+            'Nyando',
+            'Muhoroni',
+            'Seme',
+
+            // Nakuru County
+            'Nakuru East',
+            'Nakuru West',
+            'Naivasha',
+            'Gilgil',
+            'Subukia',
+            'Molo',
+            'Kuresoi North',
+            'Kuresoi South',
+
+            // Uasin Gishu County
+            'Turbo',
+            'Kesses',
+            'Ainabkoi',
+            'Kapseret',
+            'Moiben',
+            'Soy',
+
+            // Machakos County
+            'Machakos Town',
+            'Mwala',
+            'Kangundo',
+            'Masinga',
+            'Yatta',
+            'Kathiani',
+
+            // Nyeri County
+            'Nyeri Town',
+            'Othaya',
+            'Tetu',
+            'Mathira',
+            'Mukurweini',
+
+            // Meru County
+            'Imenti North',
+            'Imenti South',
+            'Buuri',
+            'Tigania West',
+            'Tigania East',
+
+            // Kakamega County
+            'Lurambi',
+            'Navakholo',
+            'Malava',
+            'Mumias East',
+            'Mumias West',
+            'Butere',
+
+            // Bungoma County
+            'Bungoma East',
+            'Bungoma West',
+            'Kanduyi',
+            'Sirisia',
+            'Kimilili',
+
+            // Other additional wards
+            'Kitui Central',
+            'Moyale',
+            'Taveta',
+            'Kilifi South',
+            'Kilifi North',
+            'Kwale Central',
+            'Narok North',
+            'Narok South',
+            'Bomet Central',
+            'Bomet East',
+            'Kericho Town',
+            'Kipkelion East',
+            'Embu North',
+            'Embu East',
+            'Mbeere South',
+            'Isiolo Central',
+            'Marsabit South',
+            'Wajir East',
+            'Mandera North',
+            'Garissa Central',
+            'Tana River West'
+        ];
+    }
 }

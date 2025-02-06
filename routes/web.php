@@ -9,58 +9,10 @@ use App\Http\Controllers\RegisterRequestController;
 use App\Http\Controllers\PropertyImageController;
 use App\Http\Controllers\PropertyVideoController;
 use App\Models\RegisterRequest;
+use App\Http\Controllers\LocationController;
 
 Route::get('/', function () {
-    $counties = [
-        "Baringo",
-        "Bomet",
-        "Bungoma",
-        "Busia",
-        "Elgeyo Marakwet",
-        "Embu",
-        "Garissa",
-        "Homa Bay",
-        "Isiolo",
-        "Kajiado",
-        "Kakamega",
-        "Kericho",
-        "Kiambu",
-        "Kilifi",
-        "Kirinyaga",
-        "Kisii",
-        "Kisumu",
-        "Kitui",
-        "Kwale",
-        "Laikipia",
-        "Lamu",
-        "Machakos",
-        "Makueni",
-        "Mandera",
-        "Marsabit",
-        "Meru",
-        "Migori",
-        "Mombasa",
-        "Murang'a",
-        "Nairobi",
-        "Nakuru",
-        "Nandi",
-        "Narok",
-        "Nyamira",
-        "Nyandarua",
-        "Nyeri",
-        "Samburu",
-        "Siaya",
-        "Taita Taveta",
-        "Tana River",
-        "Tharaka Nithi",
-        "Trans Nzoia",
-        "Turkana",
-        "Uasin Gishu",
-        "Vihiga",
-        "Wajir",
-        "West Pokot"
-    ];
-    return view('home', ['counties' => $counties]);
+    return view('home', ['counties' => LocationController::getCounties(), 'wards' => LocationController::getWards(), 'constituencies' => LocationController::getCounstituency(), 'subcounties' => LocationController::getSubCounties()]);
 })->name('home');
 Route::view('/about-us', 'about-us')->name('aboutUs');
 Route::view('/contact-us', 'contact-us')->name('contactUs');
@@ -73,6 +25,7 @@ Route::controller(PropertyController::class)->group(function () {
     Route::get('/property/create/media', 'createMedia')->name('property.create.media');
     Route::get('/property/edit/{property}', 'edit')->name('property.edit');
 
+    Route::post('/property/media/redirect', 'storeMeta')->name('property.redirect.media');
     Route::post('/property/create', 'store')->name('property.store');
     Route::post('/property/image/{property}', 'imageStore')->name('property.image.create');
     Route::post('/property/video/{property}', 'videoStore')->name('property.video.create');

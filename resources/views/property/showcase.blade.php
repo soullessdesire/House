@@ -6,7 +6,7 @@
     <br>
     <section class="w-full flex">
         <img id="bigImage" src=" {{ asset('assets/images/image 2.jpeg')}} " alt="" class="object-cover rounded w-1/2 mr-4 w-[575px] h-[370px] transition transition-all duration-300">
-        <section class="w-1/2">
+        <section class="grow">
             <p class="text-sm text-neutral-500 font-secondary mb-10">
                 {{ $property->description }}
             </p>
@@ -16,7 +16,7 @@
                 </p>
                 <ion-icon name="arrow-forward-outline" class="group-hover:text-black text-white transition transition-all duration-500"></ion-icon>
             </button>
-            <div class="flex gap-8 mb-4">
+            <div class="flex gap-8 mb-4 w-full">
                 <button class="bg-black text-white flex gap-4 py-3 justify-center items-center px-6 font-secondary rounded transition transition-all hover:rounded-xl duration-150">
                     <ion-icon name="call-outline"></ion-icon>
                     <p>
@@ -29,6 +29,15 @@
                         Whatsapp
                     </p>
                 </button>
+
+                @can('update', $property)
+                <a href="{{url('/property/edit/'.$property->id)}}" class="bg-black text-white flex gap-4 py-3 justify-center items-center px-6 font-secondary rounded transition transition-all hover:rounded-xl duration-150">
+                    <ion-icon name="create-outline"></ion-icon>
+                    <p>
+                        Edit
+                    </p>
+                </a>
+                @endcan
             </div>
         </section>
     </section>

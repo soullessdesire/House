@@ -7,7 +7,7 @@
             Company Name
         </h1>
     </nav>
-    <section class="w-full flex justify-center items-center p-4">
+    <section class="w-full flex h-screen justify-center items-center p-4">
         <div class="w-[600px] h-fit border shadow rounded p-4 bg-white">
             <h1 class="font-primary text-4xl mb-10">
                 Signup

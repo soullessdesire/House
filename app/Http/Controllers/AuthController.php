@@ -37,7 +37,7 @@ class AuthController extends Controller
 
         RegisterRequest::create($validated);
 
-        return redirect('/catalog')->with('message', 'Your request has been sent to the admin of the website please wait as he confirms your identity and upgrade you to a user');
+        return redirect('/property')->with('message', 'Your request has been sent to the admin of the website please wait as he confirms your identity and upgrade you to a user');
     }
     public function session()
     {

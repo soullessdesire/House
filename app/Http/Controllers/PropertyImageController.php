@@ -9,7 +9,8 @@ class PropertyImageController extends Controller
 {
     public function destroy(PropertyImage $propertyImage)
     {
+        $this->authorize('delete', $propertyImage->property());
         $propertyImage->delete();
-        return response()->json(['message' => 'Image successfully Deleted']);
+        return response()->json(['success' => 'Image successfully Deleted']);
     }
 }
