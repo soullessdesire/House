@@ -36,7 +36,7 @@ class PropertyController extends Controller
         $constituency = request()->input('constituency');
         $subcounty = request()->input('subcounty');
         $ward = request()->input('ward');
-        $location = request()->input('locaation');
+        $location = request()->input('location');
         $sublocation = request()->input('sublocation');
         $village = request()->input('village');
         $budget = request()->input('budget');
@@ -47,13 +47,13 @@ class PropertyController extends Controller
 
         if ($county) {
             $query->whereHas('location', function ($query) use ($county, $subcounty, $constituency, $ward, $location, $sublocation, $village) {
-                $query->where('county', $county);
-                $query->where('subcounty', $subcounty);
-                $query->where('constituency', $constituency);
-                $query->where('ward', $ward);
-                $query->where('location', $location);
-                $query->where('sublocation', $sublocation);
-                $query->where('village', $village);
+                $query->where('county', $county)
+                    ->where('subcounty', $subcounty)
+                    ->where('constituency', $constituency)
+                    ->where('ward', $ward)
+                    ->where('location', 'LIKE', '%' . $location . '%')
+                    ->where('sublocation', 'LIKE', '%' . $sublocation . '%')
+                    ->where('village', 'LIKE', '%' . $village . '%');
             });
         }
 

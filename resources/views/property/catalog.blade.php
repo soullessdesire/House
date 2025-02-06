@@ -14,9 +14,9 @@
             Houses
         </h1>
     </section>
-    <section class="grid grid-cols-3 gap-12 h-[2050px]">
+    <section class="grid grid-cols-3 gap-12 h-[2150px]">
         @foreach ($properties as $property)
-        <div class="flex flex-col gap-2 rouded shadow border p-2 h-[450px]">
+        <div class="flex flex-col gap-2 rouded shadow border p-2 h-[470px]">
             <img src="{{asset('assets/images/house.jpeg')}}" alt="" class="rounded object-cover w-full aspect-ratio-1">
             <h3 class="font-primary text-xl text-left">{{ $property->title }}</h3>
             <p class="font-secondary text-sm text-neutral-500 mb-auto">{{ $property->description }}</p>
