@@ -102,12 +102,12 @@ class PropertyController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:45',
             'description' => 'required|string',
-            'bedrooms' => 'required|integer|max:6',
-            'price' => 'required|integer|max:100000',
-            'county' => 'required|string|max:15',
-            'subcounty' => 'nullable|string|max:15',
-            'constituency' => 'nullable|string|max:15',
-            'ward' => 'nullable|string|max:15',
+            'bedrooms' => 'required',
+            'price' => 'required|integer',
+            'county' => 'required|string',
+            'subcounty' => 'nullable|string',
+            'constituency' => 'nullable|string',
+            'ward' => 'nullable|string',
             'location' => 'nullable|string|max:15',
             'sublocation' => 'nullable|string|max:15',
             'village' => 'nullable|string|max:15',
@@ -119,17 +119,21 @@ class PropertyController extends Controller
                 ->withInput();
         }
 
-        $this->title = $request->input('title');
-        $this->price = $request->input('price');
-        $this->bedrooms = $request->input('bedrooms');
-        $this->description = $request->input('description');
-        $this->county = $request->input('county');
-        $this->subcounty = $request->input('subcounty');
-        $this->constituency = $request->input('constituency');
-        $this->ward = $request->input('ward');
-        $this->location = $request->input('location');
-        $this->sublocation = $request->input('sublocation');
-        $this->village = $request->input('village');
+        session([
+            'property_meta' => $request->only([
+                'title',
+                'description',
+                'bedrooms',
+                'price',
+                'county',
+                'subcounty',
+                'constituency',
+                'ward',
+                'location',
+                'sublocation',
+                'village'
+            ])
+        ]);
 
         return redirect()->route('property.create.media');
     }
@@ -186,35 +190,75 @@ class PropertyController extends Controller
     public function store(Request $request)
     {
         $this->authorize('logged', Auth::user());
+        $meta = session('property_meta');
+
+        if (!$meta) {
+            return redirect()->route('property.create.meta')->with('error', 'Session expired. Please re-enter property details.');
+        }
         try {
             $location = Location::create([
-                'county' => $this->county,
-                'subcounty' => $this->subcounty,
-                'constituency' => $this->constituency,
-                'ward' => $this->ward,
-                'location' => $this->location,
-                'sublocation' => $this->sublocation,
-                'village' => $this->village
+                'county' => $meta['county'],
+                'subcounty' => $meta['subcounty'],
+                'constituency' => $meta['constituency'],
+                'ward' => $meta['ward'],
+                'location' => $meta['location'],
+                'sublocation' => $meta['sublocation'],
+                'village' => $meta['village']
             ]);
+
             $property = Property::create([
-                'price' => $this->price,
-                'bedrooms' => $this->bedrooms,
+                'price' => $meta['price'],
+                'bedrooms' => $meta['bedrooms'],
                 'location_id' => $location->id,
-                'title' => $this->title,
-                'description' => $this->description,
+                'title' => $meta['title'],
+                'description' => $meta['description'],
                 'status' => 'Available',
                 'owner_id' => Auth::id()
             ]);
+            session()->forget('property_meta');
         } catch (Exception $e) {
+            dd($e);
             return response()->json(['Exception' => 'error'], 500);
         }
-        $this->imageStore($property, $request);
-        $this->videoStore($property, $request);
-        Mail::to($property->owner)->send(
-            new PropertyPosted($property)
-        );
+        try {
 
-        return redirect('/property/{$property->id}');
+            if ($request->hasFile('images')) {
+
+                foreach ($request->file('images') as $image) {
+                    $path = $image->store('assets/images/db', 'public');
+                    PropertyImage::create([
+                        'property_id' => $property->id,
+                        'image_path' => $path
+                    ]);
+                }
+            }
+        } catch (Exception $e) {
+            return response()->json(
+                [
+                    'message' => 'There has been an error in creating a new image for your property',
+                    'Error' => $e
+                ],
+                500
+            );
+        }
+        try {
+            if ($request->hasFile('videos')) {
+                foreach ($request->file('videos') as $video) {
+                    $path = $video->store('assets/videos/db', 'public');
+                    PropertyVideo::create([
+                        'property_id' => $property->id,
+                        'video_path' => $path
+                    ]);
+                }
+            }
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => 'There has been an error in creating a new video for your property',
+                'Error' => $e
+            ]);
+        }
+
+        return redirect("/property/{$property->id}")->with('success', 'You have created a new property successfully');
     }
 
     public function edit(Property $property)
@@ -239,7 +283,7 @@ class PropertyController extends Controller
             'village' => 'nullable|string|max:15',
         ]);
         $property->update($validated);
-        return redirect('/showcase/{$property->id()}');
+        return redirect("/showcase/{$property->id()}");
     }
     public function destroy(Property $property)
     {

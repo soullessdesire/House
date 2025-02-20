@@ -8,6 +8,11 @@
             </p>
         </div>
         <form action="{{route('property')}}" method="GET" class="w-full">
+            @foreach (['title','description','price','bedrooms','county','subcounty','constitiuency','ward','location','sublocation','village'] as $field)
+            @error($field)
+            <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
+            @endforeach
             <h1 class="font-primary mb-3 text-black text-2xl text-center">
                 Search by location
             </h1>
@@ -94,7 +99,7 @@
                 </label>
             </div>
 
-            <input type="submit" value="Search" class="w-full text-center bg-black text-white h-[50px] rounded-lg outline outline-black outline-1 hover:text-black hover:bg-white transition transition-duration-300 font-primary">
+            <input type="submit" value="Search" class="w-full text-center bg-black text-white h-[50px] rounded-lg outline outline-black outline-1 hover:text-black hover:bg-transparent transition-all duration-300 font-primary">
         </form>
     </section>
     <script>

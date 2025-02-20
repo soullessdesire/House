@@ -5,9 +5,15 @@
 
     @session('error')
     <div class="text-red text-sm font-primary">
-        There is a field you forgot to fill
+        {{ $message }}
     </div>
     @endsession
+    @foreach (['title','description','price','bedrooms','county','subcounty','constitiuency','ward','location','sublocation','village'] as $field)
+    @error($field)
+    <span class="text-red-500 text-sm">{{ $message }}</span>
+    @enderror
+    @endforeach
+
 
     <form id="property-form" action="{{ route('property.redirect.media') }}" method="POST">
         @csrf
@@ -31,18 +37,4 @@
         <x-form.location></x-form.location>
         <button type="submit" class="button-86 mt-6">Submit</button>
     </form>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('submit').addEventListener('click', (event) => {
-                event.preventDefault();
-
-                document.querySelectorAll('input').forEach(input => {
-                    sessionStorage.setItem(input.name, input.value);
-                });
-                sessionStorage.setItem(document.querySelector('textarea').name, document.querySelector('textarea').value);
-
-                document.getElementById('property-form').submit()
-            });
-        });
-    </script>
 </x-form.layout>

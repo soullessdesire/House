@@ -22,46 +22,48 @@ $bedroom_object = [
             Catalog
         </h1>
     </section>
-    <x-form.shared-search :counties="$counties" :subcounties="$subcounties" :constituencies="$constituencies" :wards="$wards"></x-form.shared-search>
+    <section class="w-full h-fit ">
+        <x-form.shared-search :counties="$counties" :subcounties="$subcounties" :constituencies="$constituencies" :wards="$wards"></x-form.shared-search>
+    </section>
     <section class=" flex justify-center items-center p-2">
         <h1 class="font-primary text-6xl text-left self-start">
             Houses
         </h1>
     </section>
-    @error('*')
-    There has been an error. Please try again
+    @foreach (['title','description','price','bedrooms','county','subcounty','constitiuency','ward','location','sublocation','village'] as $field)
+    @error($field)
+    {{ $message }}
     @enderror
-    <section class="grid grid-cols-3 gap-12 h-fit">
+    @endforeach
+    <section class="grid grid-cols-3 gap-8 h-fit">
         @if ($properties)
         @foreach ($properties as $property)
-        <div class="flex flex-col gap-2 rouded shadow border p-2 h-[500px]">
+        <div class="flex flex-col gap-2 rouded-lg shadow border p-2 h-[490px]">
             <img src="{{asset('assets/images/house.jpeg')}}" alt="" class="rounded object-cover w-full aspect-ratio-1">
-            <h3 class="font-primary text-xl text-left">{{ $property->title }}
+            <h3 class="font-primary text-2xl text-left mb-2">{{ $property->title }}
             </h3>
             <div class="flex gap-2">
-                <span class="backdrop-blur h-fit w-fit px-2 py-1 rounded border-l-white/20 border-t-white/20 text-sm bg-neutral-500">
-                    <a href="{{url('/property?budget='.floor($property->price))}}">
-                        {{$property->price}}
-                    </a>
+                <span class="backdrop-blur h-fit w-fit px-2 py-1 rounded border-l-white/20 border-t-white/20 text-xs bg-neutral-500">
+                    {{floor($property->price).' Ksh'}}
                 </span>
-                <span class="backdrop-blur h-fit w-fit px-2 py-1 rounded border-l-white/20 border-t-white/20 text-sm bg-neutral-500">
+                <span class="backdrop-blur h-fit w-fit px-2 py-1 rounded border-l-white/20 border-t-white/20 text-xs bg-neutral-500">
                     <a href="{{ url('/property?bedrooms[]='.$property->bedrooms)}}">
                         {{$bedroom_object[(string)$property->bedrooms]}}
                     </a>
                 </span>
-                <span class="backdrop-blur h-fit w-fit px-2 py-1 rounded border-l-white/20 border-t-white/20 text-sm bg-neutral-500">
+                <span class="backdrop-blur h-fit w-fit px-2 py-1 rounded border-l-white/20 border-t-white/20 text-xs bg-neutral-500">
                     <a href="{{ url('/property?county='.$property->location->county)}}">
                         {{$property->location->county}}
                     </a>
                 </span>
-                <span class="backdrop-blur h-fit w-fit px-2 py-1 rounded border-l-white/20 border-t-white/20 text-sm bg-neutral-500">
+                <span class="backdrop-blur h-fit w-fit px-2 py-1 rounded border-l-white/20 border-t-white/20 text-xs bg-neutral-500">
                     <a href="{{ url('/property?status='.$property->status)}}">
                         {{$property->status}}
                     </a>
                 </span>
             </div>
-            <p class="font-secondary text-sm text-neutral-500 mb-auto">{{ $property->description }}</p>
-            <a href="{{url('/property/'. $property->id)}}" class="justify-self-end px-4 py-3 bg-black rounded border w-fit border-black text-white hover:text-black hover:bg-transparent transition-all duration-500">Check This House</a>
+            <p class="font-secondary text-xs text-neutral-500 mb-auto">{{ $property->description }}</p>
+            <a href="{{url('/property/'. $property->id)}}" class="text-sm justify-self-end px-4 py-3 bg-black rounded-full font-numbers border w-fit border-black text-white hover:text-black hover:bg-transparent transition-all duration-500">Check This House</a>
         </div>
         @endforeach
         <div class="col-span-3 border-t border-black py-3">
@@ -81,7 +83,7 @@ $bedroom_object = [
                 const elToChange = document.querySelector('[data-height=change]')
                 const elToDisplay = document.querySelector('[data-form=full]')
 
-                elToChange.classList.toggle('h-800')
+                elToChange.classList.toggle('h-[800px]')
 
                 elToDisplay.classList.toggle('hidden')
 

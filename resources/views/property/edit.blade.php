@@ -44,6 +44,11 @@
         Meta
     </h2>
     <form action="{{route('property.update', ['property' => $property->id])}}" id="update-form">
+        @foreach (['title','description','price','bedrooms','county','subcounty','constitiuency','ward','location','sublocation','village'] as $field)
+        @error($field)
+        <span class="text-red-500 text-sm">{{ $message }}</span>
+        @enderror
+        @endforeach
         @csrf
         <x-form.input type="text" name="title" id="title" placeholder="Title" value="{{$property->title}}"></x-form.input>
         <textarea placeholder="Description" name="description" class="outline outline-black outline-1 xy-shadow-no-blur text-black bg-white w-5/6 h-[150px] font-primary rounded p-2 mb-2"> {{$property->description}}</textarea>
