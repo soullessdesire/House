@@ -38,6 +38,7 @@ Route::controller(PropertyController::class)->group(function () {
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('/session', 'session')->name('session.user');
+    Route::post('/logout', 'logout')->name('logout');
     Route::post('/register', 'register')->name('register.user');
 
     Route::get('/login', 'login')->name('login');

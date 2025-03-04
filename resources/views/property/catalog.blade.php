@@ -38,7 +38,7 @@ $bedroom_object = [
     <section class="grid grid-cols-3 gap-8 h-fit">
         @if ($properties)
         @foreach ($properties as $property)
-        <div class="flex flex-col gap-2 rouded-lg shadow border p-2 h-[490px]">
+        <div class="flex flex-col gap-2 rouded-lg shadow border p-2 h-fit">
             <img src="{{asset('assets/images/house.jpeg')}}" alt="" class="rounded object-cover w-full aspect-ratio-1">
             <h3 class="font-primary text-2xl text-left mb-2">{{ $property->title }}
             </h3>
@@ -63,7 +63,7 @@ $bedroom_object = [
                 </span>
             </div>
             <p class="font-secondary text-xs text-neutral-500 mb-auto">{{ $property->description }}</p>
-            <a href="{{url('/property/'. $property->id)}}" class="text-sm justify-self-end px-4 py-3 bg-black rounded-full font-numbers border w-fit border-black text-white hover:text-black hover:bg-transparent transition-all duration-500">Check This House</a>
+            <a href="{{url('/property/'. $property->id)}}" class="text-sm justify-self-end px-2 py-1 bg-black rounded-full font-numbers border w-fit border-black text-white hover:text-black hover:bg-transparent transition-all duration-500 text-xs">Check This House</a>
         </div>
         @endforeach
         <div class="col-span-3 border-t border-black py-3">

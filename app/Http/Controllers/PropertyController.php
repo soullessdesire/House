@@ -94,11 +94,22 @@ class PropertyController extends Controller
     }
     public function createMeta()
     {
-        $this->authorize('logged', Auth::user());
-        return view('property.form.metadata');
+        try {
+
+            $this->authorize('logged', Auth::user());
+            return view('property.form.metadata');
+        } catch (Exception $e) {
+            return redirect()->route('/login')->with('error', 'You must be logged in for you to access this page');
+        }
     }
     public function storeMeta(Request $request)
     {
+        try {
+            $this->authorize('logged', Auth::user());
+        } catch (Exception $e) {
+            return redirect()->route('login')->with('error', 'You must be logged in to perform this function');
+        }
+
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:45',
             'description' => 'required|string',
@@ -139,8 +150,13 @@ class PropertyController extends Controller
     }
     public function createMedia()
     {
-        $this->authorize('logged', Auth::user());
-        return view('property.form.mediadata');
+        try {
+
+            $this->authorize('logged', Auth::user());
+            return view('property.form.mediadata');
+        } catch (Exception $e) {
+            return redirect()->route('login')->with('error', 'You must be logged in to access this page');
+        }
     }
     public function imageStore(Property $property, Request $request)
     {
@@ -189,7 +205,12 @@ class PropertyController extends Controller
     }
     public function store(Request $request)
     {
-        $this->authorize('logged', Auth::user());
+        try {
+
+            $this->authorize('logged', Auth::user());
+        } catch (Exception $e) {
+            return redirect()->route('login')->with('error', 'You must be logged in to perform this function');
+        }
         $meta = session('property_meta');
 
         if (!$meta) {
@@ -263,12 +284,17 @@ class PropertyController extends Controller
 
     public function edit(Property $property)
     {
-        $this->authorize('update', $property);
         return view('property.edit', ['property' => $property]);
     }
 
     public function update(Property $property)
     {
+        try {
+
+            $this->authorize('update', $property);
+        } catch (Exception $e) {
+            return redirect()->route('/login')->with('error', 'You must be logged in as admin or property owner to update this property');
+        }
         $validated = request()->validate([
             'title' => 'required|string|max:45',
             'description' => 'required|string',
@@ -287,7 +313,11 @@ class PropertyController extends Controller
     }
     public function destroy(Property $property)
     {
-        $this->authorize('delete', $property);
+        try {
+            $this->authorize('delete', $property);
+        } catch (Exception $e) {
+            return redirect()->route('login')->with('error', 'You must be logged in as the property owner or admin to delete a property');
+        }
         $property->delete();
         return route('property');
     }

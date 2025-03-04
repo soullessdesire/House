@@ -16,13 +16,28 @@ class RegisterRequestController extends Controller
         $this->authorize('admin', Auth::user());
         return view('admin.register_request', ['requests' => RegisterRequest::all()]);
     }
-    public function accept_request(RegisterRequest $registerRequest)
+    public function accept_request($registerrequest)
     {
         $this->authorize('admin', Auth::user());
-        $attributes = $registerRequest->validated();
 
         try {
-            User::create($attributes);
+
+            $registerRequest = RegisterRequest::findOrFail($registerrequest);
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+        try {
+            User::create(
+                [
+                    'email' => $registerRequest->email,
+                    'password' => $registerRequest->password,
+                    'username' => $registerRequest->username,
+                    'role' => 'User',
+                    'first_name' => $registerRequest->first_name,
+                    'last_name' => $registerRequest->last_name,
+                    'phone_number' => $registerRequest->phone_number
+                ]
+            );
 
             return response()->json([
                 'success' => true,

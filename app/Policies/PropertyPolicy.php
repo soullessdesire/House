@@ -13,7 +13,7 @@ class PropertyPolicy
      */
     public function update(User $user, Property $property): bool
     {
-        return $property->owner()->is($user);
+        return $property->owner()->is($user) || $user->isAdmin();
     }
 
     /**

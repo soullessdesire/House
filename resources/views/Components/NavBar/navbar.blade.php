@@ -12,6 +12,12 @@
         <a href="{{ url('/property/create/meta') }}" class="border border-black bg-black text-white hover:text-black hover:bg-transparent transition transition-all duration-500 text-sm px-5 py-2 rounded">
             Post A Rental
         </a>
+        <form action="{{ route('logout') }}" method="post">
+            @csrf
+            <button type="submit" class="border border-black bg-transparent hover:text-white hover:bg-black transition transition-all duration-500 px-5 py-2 text-sm rounded">
+                Log out
+            </button>
+        </form>
     </div>
     @else
     <div class="flex gap-8">

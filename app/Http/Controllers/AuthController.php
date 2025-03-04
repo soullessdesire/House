@@ -16,6 +16,15 @@ class AuthController extends Controller
         }
         return view('auth.login');
     }
+    public function logout()
+    {
+        $this->authorize('logged', Auth::user());
+        Auth::logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+
+        return redirect()->route('home');
+    }
     public function signup()
     {
         if (Auth::user()) {
