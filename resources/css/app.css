@@ -88,11 +88,6 @@
     box-shadow: #28282d 4px 4px 0px 0;
 }
 
-/* Styles */
-input {
-    all: unset;
-}
-
 textarea {
     all: unset;
 }

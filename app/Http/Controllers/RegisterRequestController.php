@@ -58,6 +58,6 @@ class RegisterRequestController extends Controller
         } catch (Exception $e) {
             return response()->json(['Error' => $e->getMessage()], 500);
         }
-        return response()->json(['message' => 'The request was denied successfully'], 200);
+        return redirect()->route('login')->with('success', 'You have successfully created a user');
     }
 }

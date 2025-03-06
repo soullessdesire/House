@@ -21,7 +21,7 @@
                             name="first_name"
                             id="firstname"
                             placeholder="First Name"
-                            class="font-primary placeholder-neutral-500 w-[225px] h-[50px] outline outline-black outline-1 xy-shadow-no-blur rounded mb-6 px-4"
+                            class="font-primary placeholder-neutral-500 w-[240px] h-[50px] outline outline-black outline-1 xy-shadow-no-blur rounded mb-6 px-4"
                             aria-label="Firstname">
                         @error('firstname')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -33,7 +33,7 @@
                             name="last_name"
                             id="lastname"
                             placeholder="Last Name"
-                            class="font-primary placeholder-neutral-500 w-[225px] h-[50px] outline outline-black outline-1 xy-shadow-no-blur rounded mb-6 px-4"
+                            class="font-primary placeholder-neutral-500 w-[240px] h-[50px] outline outline-black outline-1 xy-shadow-no-blur rounded mb-6 px-4"
                             aria-label="Lastname">
                         @error('lastname')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -88,6 +88,14 @@
                     <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror
                 </div>
+                <div class="flex gap-2">
+                    <input type="checkbox" name="terms" id="terms" class="w-4 h-4" />
+                    <span class="text-neutral-500 italic text-xs">By registering you will be agreeing to our <a href="{{ route('Terms.Conditions') }}" target="_blank" rel="noopener noreferrer" class="text-blue-500">Terms and Conditions</a></span>
+                    @error('checkbox')
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
+                </div>
+                <br>
                 <button type="submit" class="button-86">Submit</button>
             </form>
             <p class="font-secondary mb-6">

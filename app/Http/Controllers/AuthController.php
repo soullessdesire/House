@@ -34,6 +34,9 @@ class AuthController extends Controller
     }
     public function register()
     {
+        if (!request()->terms) {
+            return redirect()->back()->with('error', 'You must accept the terms and conditions first to register');
+        }
         $validated = request()->validate([
             'first_name' => ['required', 'min:4'],
             'last_name' => ['required', 'min:4'],

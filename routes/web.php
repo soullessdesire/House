@@ -16,6 +16,7 @@ Route::get('/', function () {
 })->name('home');
 Route::view('/about-us', 'about-us')->name('aboutUs');
 Route::view('/contact-us', 'contact-us')->name('contactUs');
+Route::view('/terms-and-conditions', 'terms-and-conditions')->name('Terms.Conditions');
 
 
 Route::controller(PropertyController::class)->group(function () {
