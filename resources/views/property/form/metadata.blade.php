@@ -37,4 +37,15 @@
         <x-form.location></x-form.location>
         <button type="submit" class="button-86 mt-6">Submit</button>
     </form>
+    @if(session('error'))
+    <script>
+        Swal.fire({
+            title: 'Error!',
+            text: "{{ session('error') }}",
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    </script>
+    @endif
+
 </x-form.layout>

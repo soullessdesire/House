@@ -34,22 +34,20 @@ class AuthController extends Controller
     }
     public function register()
     {
-        if (!request()->terms) {
-            return redirect()->back()->with('error', 'You must accept the terms and conditions first to register');
-        }
         $validated = request()->validate([
             'first_name' => ['required', 'min:4'],
             'last_name' => ['required', 'min:4'],
             'phone_number' => ['required', 'min:10', 'max:10'],
             'username' => ['unique:users', 'required', 'min:4'],
             "email" => ['unique:users', 'required', 'min:11', 'max:254'],
-            "password" => ['min:8']
+            "password" => ['min:8'],
+            "terms" => ['accepted']
         ]);
 
 
         RegisterRequest::create($validated);
 
-        return redirect('/property')->with('message', 'Your request has been sent to the admin of the website please wait as he confirms your identity and upgrade you to a user');
+        return redirect()->route('property')->with('message', 'Your request has been sent to the admin of the website please wait as he confirms your identity and upgrade you to a user');
     }
     public function session()
     {

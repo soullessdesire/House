@@ -116,5 +116,16 @@ $bedroom_object = [
             });
         })
     </script>
+    @if(session('message'))
+    <script>
+        Swal.fire({
+            title: 'Success!',
+            text: "{{ session('message') }}",
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    </script>
+    @endif
+
     <x-footer></x-footer>
 </x-layout>

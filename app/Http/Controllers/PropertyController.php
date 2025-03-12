@@ -17,18 +17,6 @@ use \App\Mail\PropertyPosted;
 class PropertyController extends Controller
 {
     use AuthorizesRequests;
-    private $title = null;
-    private $description = null;
-    private $price = null;
-    private $county = null;
-    private $subcounty = null;
-    private $constituency = null;
-    private $bedrooms = null;
-    private $ward = null;
-    private $location = null;
-    private $sublocation = null;
-    private $village = null;
-
 
     public function index()
     {
@@ -99,7 +87,7 @@ class PropertyController extends Controller
             $this->authorize('logged', Auth::user());
             return view('property.form.metadata');
         } catch (Exception $e) {
-            return redirect()->route('/login')->with('error', 'You must be logged in for you to access this page');
+            return redirect()->route('login')->with('error', 'You must be logged in for you to access this page');
         }
     }
     public function storeMeta(Request $request)
@@ -173,15 +161,9 @@ class PropertyController extends Controller
                 }
             }
         } catch (Exception $e) {
-            return response()->json(
-                [
-                    'message' => 'There has been an error in creating a new image for your property',
-                    'Error' => $e
-                ],
-                500
-            );
+            return redirect()->back()->with('success', 'We have encountered an error please try again');
         }
-        return response()->json(['message' => 'New Image has successefully been created'], 200);
+        return redirect()->route('property')->with('success', 'Your image has been stored successfully');
     }
     public function videoStore(Property $property, Request $request)
     {
@@ -196,12 +178,9 @@ class PropertyController extends Controller
                 }
             }
         } catch (Exception $e) {
-            return response()->json([
-                'message' => 'There has been an error in creating a new video for your property',
-                'Error' => $e
-            ]);
+            return redirect()->back()->with('error', 'We have encountered an error please try again');
         }
-        return response()->json(['message' => 'New Image has successfully been created'], 200);
+        return redirect()->route('property')->with('success', 'Your Video has been stored successfully');
     }
     public function store(Request $request)
     {
@@ -239,7 +218,7 @@ class PropertyController extends Controller
             session()->forget('property_meta');
         } catch (Exception $e) {
             dd($e);
-            return response()->json(['Exception' => 'error'], 500);
+            return redirect()->route('login')->with('message', 'There has been an error in creating you image');
         }
         try {
 
@@ -254,13 +233,7 @@ class PropertyController extends Controller
                 }
             }
         } catch (Exception $e) {
-            return response()->json(
-                [
-                    'message' => 'There has been an error in creating a new image for your property',
-                    'Error' => $e
-                ],
-                500
-            );
+            return redirect()->route('login')->with('message', 'There has been an error in creating you image');
         }
         try {
             if ($request->hasFile('videos')) {
@@ -293,7 +266,7 @@ class PropertyController extends Controller
 
             $this->authorize('update', $property);
         } catch (Exception $e) {
-            return redirect()->route('/login')->with('error', 'You must be logged in as admin or property owner to update this property');
+            return redirect()->route('login')->with('error', 'You cannot update this property');
         }
         $validated = request()->validate([
             'title' => 'required|string|max:45',
@@ -316,7 +289,7 @@ class PropertyController extends Controller
         try {
             $this->authorize('delete', $property);
         } catch (Exception $e) {
-            return redirect()->route('login')->with('error', 'You must be logged in as the property owner or admin to delete a property');
+            return redirect()->route('login')->with('error', 'You cannot delete this property');
         }
         $property->delete();
         return route('property');

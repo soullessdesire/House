@@ -5,64 +5,62 @@
     <x-slot:modalContent>
     </x-slot:modalContent>
     <x-navbar.navbar></x-navbar.navbar>
+
     <section class="flex justify-center items-center flex-col gap-12 h-[400px] my-[40px]">
-        <h1 class="font-primary text-8xl w-[976px] text-center">
-            About Us
-        </h1>
+        <h1 class="font-primary text-8xl w-[976px] text-center">About Us</h1>
     </section>
+
     <section class="bg-black rounded w-full text-white p-4 flex justify-between mb-2">
         <div class="w-1/2 h-[400px]">
-            <h1 class="text-6xl mb-10 font-primary">
-                Select Your Dream House
-            </h1>
+            <h1 class="text-6xl mb-10 font-primary">Select Your Dream House</h1>
             <p class="text-sm font-secondary mb-6">
-                Discover a wide range of properties tailored to fit your lifestyle and budget. Whether you're looking for a cozy apartment, a spacious family home, or a luxurious getaway, we have options to match your preferences. With intuitive search tools and detailed property descriptions, finding your ideal rental has never been simpler. Start your journey today and turn your dream into reality!
+                Discover a wide range of properties tailored to fit your lifestyle and budget. Whether you're looking for a cozy apartment, a spacious family home, or a luxurious getaway, we have options to match your preferences.
             </p>
-            <button class="flex items-center justify-center border-white border font-secondary px-4 rounded hover:bg-white hover:border-black transition transition-duration-500 hover:text-black">
-                <p class="text-sm">
-                    See Our Catalog
-                </p>
-                <img src=" {{asset('assets/svgs/arrow-right-white.svg')}} " alt="" class="w-[48px] h-[30px] hover:black trnasition transition-duration-500">
+            <button class="flex items-center justify-center border-white border font-secondary px-4 rounded hover:bg-white hover:border-black transition duration-500 hover:text-black">
+                <p class="text-sm">See Our Catalog</p>
+                <img src="{{ asset('assets/svgs/arrow-right-white.svg') }}" alt="" class="w-[48px] h-[30px]">
             </button>
         </div>
         <img src="{{ asset('assets/images/Frame 122.png') }}" alt="" class="rounded-lg object-cover w-1/2">
     </section>
-    <section class="flex justify-center items-center flex-col bg-white p-2 rounded-lg xy-shadow-no-blur border border-black">
-        <img src=" {{ asset('assets/images/enquire.jpg')}} " alt="" class="rounded-lg object-cover w-full h-[400px]">
-        <div>
-            <h1 class="font-primary text-6xl mb-10">Enquire</h1>
-            <p class="font-secondary text-sm mb-6">
-                Have questions about your desired rental? We’re here to help! Share your details and let us assist you in making the right choice. Whether it’s pricing, availability, or specific property features, our team is ready to provide all the information you need. Fill out the form below or contact us directly to start your journey toward your dream rental today!
-            </p>
-            <button class="flex justify-center items-center px-4 border rounded border-black">
-                <p class="font-secondary">
-                    Contact Us
-                </p>
-                <img src=" {{asset('assets/svgs/arrow-right.svg')}} " alt="" class="w-[48px] h-[30px] hover:black trnasition transition-duration-500">
-            </button>
-        </div>
+
+    <section class="bg-white text-black p-6 rounded-lg border border-black">
+        <h1 class="text-6xl font-primary mb-6">Welcome to iRent</h1>
+        <p class="text-sm font-secondary mb-4">
+            At iRent, we simplify the way you find and rent homes. Whether you're looking for a cozy apartment, a spacious house, or a stylish condo, our platform offers a wide selection of rental properties to meet all your needs.
+        </p>
+        <h2 class="text-4xl font-primary mb-4">Our Mission</h2>
+        <p class="text-sm font-secondary mb-6">
+            Our mission at iRent is to provide a seamless, transparent, and stress-free rental experience for tenants and landlords alike. We are dedicated to offering a wide variety of rental options to cater to different tastes, budgets, and preferences.
+        </p>
+        <h2 class="text-4xl font-primary mb-4">What We Offer</h2>
+        <ul class="list-disc ml-6 text-sm font-secondary mb-6">
+            <li>Diverse Property Listings</li>
+            <li>Detailed Property Information</li>
+            <li>Search Flexibility with Advanced Filters</li>
+            <li>User-Friendly Interface</li>
+            <li>Secure Communication System</li>
+        </ul>
+        <h2 class="text-4xl font-primary mb-4">Why Choose iRent?</h2>
+        <ul class="list-disc ml-6 text-sm font-secondary mb-6">
+            <li>Wide Variety of Homes</li>
+            <li>Trusted Platform with Verified Listings</li>
+            <li>Dedicated Customer Support</li>
+            <li>Efficient and Hassle-Free Rental Experience</li>
+        </ul>
+        <h2 class="text-4xl font-primary mb-4">How iRent Works</h2>
+        <h3 class="text-2xl font-primary mb-2">For Tenants:</h3>
+        <p class="text-sm font-secondary">Explore listings, contact landlords, and find your dream home.</p>
+        <h3 class="text-2xl font-primary mt-4 mb-2">For Landlords:</h3>
+        <p class="text-sm font-secondary">Create listings, manage inquiries, and connect with potential tenants.</p>
     </section>
-    <section class="flex gap-12 p-2 bg-black text-white mt-2 rounded">
-        <img src=" {{ asset('assets/images/Frame 123.png')}} " alt="">
-        <div>
-            <h1 class="font-primary text-6xl mb-10">
-                Buy
-            </h1>
-            <p class="font-secondary text-sm mb-6">
-                Choose the most convenient way to make your purchase! Whether you prefer the ease of online transactions or the personalized experience of an in-person visit, we’ve got you covered. Explore our website for a seamless online buying process or visit us in person to see your options up close. Your satisfaction is our priority—shop the way that works best for you!
-            </p>
-        </div>
-    </section>
+
     <section class="flex flex-col gap-4 mt-2 p-2 bg-white border border-black xy-shadow-no-blur mb-4 rounded">
-        <div>
-            <h1 class="font-primary text-6xl mb-10">
-                Collect
-            </h1>
-            <p class="font-secondary text-sm mb-6">
-                Experience a hassle-free collection process designed with your convenience in mind. Once your order is ready, choose the collection method that suits you best—pick it up in person or opt for a scheduled delivery. Our team ensures a smooth and efficient handover, whether you're visiting us directly or coordinating a collection point. Rest assured, your satisfaction is our priority from start to finish!
-            </p>
-        </div>
-        <img src=" {{ asset('assets/images/Frame.png')}} " alt="" class="rounded object-cover h-[200px]">
+        <h1 class="font-primary text-6xl mb-10">Contact Us</h1>
+        <p class="text-sm font-secondary">
+            If you have any questions or need assistance, don’t hesitate to contact us! You can reach our support team at <a href="mailto:irentprospace@gmail.com" class="text-blue-500">irentprospace@gmail.com</a> or call us at <span class="font-bold">0113405561 / 0745896953</span>.
+        </p>
     </section>
+
     <x-footer></x-footer>
 </x-layout>
